@@ -8,9 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+TC:wght@400;500;700;900&display=swap" rel="stylesheet"/>
 
-<!-- ====================================================================
-     資料設定區 ── 直接編輯這邊
-     ==================================================================== -->
 <script>
 window.SHH_CONFIG = {
   eventTitle: "勝海藏寶季",
@@ -32,476 +29,150 @@ window.SHH_CONFIG = {
     "寶藏就在不起眼的角落"
   ]
 };
-</script>
+<\/script>
 
 <style>
-/* ====== 基底 ====== */
 *,*::before,*::after{box-sizing:border-box;}
 html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
   background:#050818;color:#f3e0a0;
   font-family:"Noto Serif TC",serif;-webkit-font-smoothing:antialiased;}
 :root{
-  --navy-1:#050818; --navy-2:#0f1640; --navy-3:#1a2860;
-  --gold-1:#f8e6a0; --gold-2:#d4a043; --gold-3:#8a5a18;
+  --navy-1:#050818;--navy-2:#0f1640;--navy-3:#1a2860;
+  --gold-1:#f8e6a0;--gold-2:#d4a043;--gold-3:#8a5a18;
   --ink:#2a1408;
 }
-
-/* ====== 背景：星空 / 銀河暈 ====== */
-.bg-sky{
-  position:fixed;inset:0;z-index:0;
-  background:
-    radial-gradient(ellipse at 25% 18%, rgba(60,40,140,.4) 0%, transparent 45%),
-    radial-gradient(ellipse at 78% 82%, rgba(80,30,90,.3) 0%, transparent 45%),
-    radial-gradient(ellipse at 50% 50%, #0d1336 0%, #050818 75%);
-}
+.bg-sky{position:fixed;inset:0;z-index:0;
+  background:radial-gradient(ellipse at 25% 18%,rgba(60,40,140,.4) 0%,transparent 45%),
+    radial-gradient(ellipse at 78% 82%,rgba(80,30,90,.3) 0%,transparent 45%),
+    radial-gradient(ellipse at 50% 50%,#0d1336 0%,#050818 75%);}
 .bg-stars{position:fixed;inset:0;z-index:1;pointer-events:none;}
 .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.7;
-  animation:twinkle var(--dur,3s) ease-in-out infinite;
-  animation-delay:var(--delay,0s);}
+  animation:twinkle var(--dur,3s) ease-in-out infinite;animation-delay:var(--delay,0s);}
 .star.big{width:3px;height:3px;box-shadow:0 0 6px rgba(255,255,255,.7);}
 @keyframes twinkle{0%,100%{opacity:.3;transform:scale(1);}50%{opacity:1;transform:scale(1.4);}}
-
-/* 飄浮金粒 */
 .bg-particles{position:fixed;inset:0;z-index:2;pointer-events:none;}
 .particle{position:absolute;width:5px;height:5px;border-radius:50%;
   background:radial-gradient(circle,#fff5c2 0%,#d4a043 60%,transparent 100%);
   box-shadow:0 0 10px #d4a043;opacity:0;
   animation:floatUp var(--dur,14s) linear infinite;animation-delay:var(--delay,0s);}
-@keyframes floatUp{
-  0%  {transform:translate(0,0);opacity:0;}
-  10% {opacity:1;}
-  90% {opacity:.8;}
-  100%{transform:translate(var(--dx,30px),-120vh);opacity:0;}
-}
-
-/* 流星 */
+@keyframes floatUp{0%{transform:translate(0,0);opacity:0;}10%{opacity:1;}90%{opacity:.8;}100%{transform:translate(var(--dx,30px),-120vh);opacity:0;}}
 .shooting-star{position:fixed;width:120px;height:2px;
   background:linear-gradient(90deg,transparent,#fff 60%,#d4a043);
-  filter:blur(1px);z-index:3;pointer-events:none;opacity:0;
-  border-radius:50%;transform:rotate(20deg);
+  filter:blur(1px);z-index:3;pointer-events:none;opacity:0;border-radius:50%;transform:rotate(20deg);
   animation:shoot var(--dur,12s) ease-out infinite;animation-delay:var(--delay,0s);}
-@keyframes shoot{
-  0%,82%{opacity:0;transform:translate(0,0) rotate(20deg);}
-  84%   {opacity:1;}
-  98%   {opacity:1;transform:translate(70vw,40vh) rotate(20deg);}
-  100%  {opacity:0;transform:translate(80vw,46vh) rotate(20deg);}
-}
-
-/* ====== 三色飄浮小精靈 ====== */
-.fairy{
-  position:fixed;width:80px;height:auto;
-  z-index:5;pointer-events:none;
-  opacity:0;
-  filter:drop-shadow(0 0 16px rgba(255,210,120,.55));
-}
-/* 橘 — 左到右，畫面上半部，有上下飄動 */
-.fairy-orange{
-  animation:fairyLR 22s linear infinite;animation-delay:0s;
-}
-@keyframes fairyLR{
-  0%   {left:-110px;top:10%;opacity:0;transform:rotate(-4deg);}
-  4%   {opacity:1;}
-  25%  {top:4%;transform:rotate(6deg);}
-  50%  {top:14%;transform:rotate(-6deg);}
-  75%  {top:6%;transform:rotate(4deg);}
-  92%  {opacity:1;left:calc(100vw + 110px);top:10%;}
-  93%  {opacity:0;}
-  100% {opacity:0;}
-}
-/* 綠 — 右到左，畫面中段，水平鏡像 */
-.fairy-green{
-  animation:fairyRL 26s linear infinite;animation-delay:7s;
-}
-@keyframes fairyRL{
-  0%   {right:-110px;top:42%;opacity:0;transform:scaleX(-1) rotate(0);}
-  4%   {opacity:1;}
-  30%  {top:50%;transform:scaleX(-1) rotate(-5deg);}
-  60%  {top:36%;transform:scaleX(-1) rotate(6deg);}
-  92%  {opacity:1;right:calc(100vw + 110px);top:44%;}
-  93%  {opacity:0;}
-  100% {opacity:0;}
-}
-/* 藍 — 從左下對角飄到右上 */
-.fairy-blue{
-  animation:fairyDiag 24s linear infinite;animation-delay:14s;
-}
-@keyframes fairyDiag{
-  0%   {left:-110px;top:82%;opacity:0;transform:rotate(0);}
-  4%   {opacity:1;}
-  30%  {top:60%;transform:rotate(5deg);}
-  60%  {top:42%;transform:rotate(-5deg);}
-  92%  {opacity:1;left:calc(100vw + 110px);top:18%;}
-  93%  {opacity:0;}
-  100% {opacity:0;}
-}
-
-/* ====== Screen 基底 ====== */
-.screen{
-  position:fixed;inset:0;z-index:10;
-  opacity:0;pointer-events:none;
-  transition:opacity .8s ease;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:20px;
-}
+@keyframes shoot{0%,82%{opacity:0;transform:translate(0,0) rotate(20deg);}84%{opacity:1;}98%{opacity:1;transform:translate(70vw,40vh) rotate(20deg);}100%{opacity:0;transform:translate(80vw,46vh) rotate(20deg);}}
+.fairy{position:fixed;width:80px;height:auto;z-index:5;pointer-events:none;opacity:0;filter:drop-shadow(0 0 16px rgba(255,210,120,.55));}
+.fairy-orange{animation:fairyLR 22s linear infinite;animation-delay:0s;}
+@keyframes fairyLR{0%{left:-110px;top:10%;opacity:0;transform:rotate(-4deg);}4%{opacity:1;}25%{top:4%;transform:rotate(6deg);}50%{top:14%;transform:rotate(-6deg);}75%{top:6%;transform:rotate(4deg);}92%{opacity:1;left:calc(100vw + 110px);top:10%;}93%{opacity:0;}100%{opacity:0;}}
+.fairy-green{animation:fairyRL 26s linear infinite;animation-delay:7s;}
+@keyframes fairyRL{0%{right:-110px;top:42%;opacity:0;transform:scaleX(-1) rotate(0);}4%{opacity:1;}30%{top:50%;transform:scaleX(-1) rotate(-5deg);}60%{top:36%;transform:scaleX(-1) rotate(6deg);}92%{opacity:1;right:calc(100vw + 110px);top:44%;}93%{opacity:0;}100%{opacity:0;}}
+.fairy-blue{animation:fairyDiag 24s linear infinite;animation-delay:14s;}
+@keyframes fairyDiag{0%{left:-110px;top:82%;opacity:0;transform:rotate(0);}4%{opacity:1;}30%{top:60%;transform:rotate(5deg);}60%{top:42%;transform:rotate(-5deg);}92%{opacity:1;left:calc(100vw + 110px);top:18%;}93%{opacity:0;}100%{opacity:0;}}
+.screen{position:fixed;inset:0;z-index:10;opacity:0;pointer-events:none;transition:opacity .8s ease;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
 .screen.active{opacity:1;pointer-events:auto;}
-
-/* ====== Entry 首頁 ====== */
 #screen-entry{justify-content:flex-start;padding-top:30px;}
-.entry-title{
-  font-family:"Noto Serif TC",serif;font-weight:700;
-  font-size:clamp(26px,3.4vw,46px);
-  color:#f8e6a0;letter-spacing:.25em;
-  margin:8px 0 4px;
-  text-shadow:0 0 18px rgba(212,160,67,.7),0 0 40px rgba(212,160,67,.35);
-}
-.entry-subtitle{
-  font-family:"Cormorant Garamond","Noto Serif TC",serif;font-style:italic;
-  font-size:clamp(12px,1.3vw,17px);
-  color:#caa86a;letter-spacing:.3em;opacity:.85;margin-bottom:8px;
-}
-.entry-map-wrap{
-  position:relative;width:min(900px,82vw);perspective:1600px;
-  flex:1;display:flex;align-items:center;justify-content:center;
-}
-.entry-map{
-  display:block;width:100%;height:auto;max-height:62vh;
-  object-fit:contain;
-  filter:drop-shadow(0 30px 50px rgba(0,0,0,.7));
-  transition:transform .35s ease;
-  transform-style:preserve-3d;
-}
+.entry-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:clamp(26px,3.4vw,46px);color:#f8e6a0;letter-spacing:.25em;margin:8px 0 4px;text-shadow:0 0 18px rgba(212,160,67,.7),0 0 40px rgba(212,160,67,.35);}
+.entry-subtitle{font-family:"Cormorant Garamond","Noto Serif TC",serif;font-style:italic;font-size:clamp(12px,1.3vw,17px);color:#caa86a;letter-spacing:.3em;opacity:.85;margin-bottom:8px;}
+.entry-map-wrap{position:relative;width:min(900px,82vw);perspective:1600px;flex:1;display:flex;align-items:center;justify-content:center;}
+.entry-map{display:block;width:100%;height:auto;max-height:62vh;object-fit:contain;filter:drop-shadow(0 30px 50px rgba(0,0,0,.7));transition:transform .35s ease;transform-style:preserve-3d;}
 .enter-btn-wrap{position:relative;margin:10px 0 24px;cursor:pointer;display:inline-block;}
-.enter-btn-img{
-  display:block;max-width:300px;width:75vw;height:auto;border:none;background:transparent;
-  cursor:pointer;
-  filter:drop-shadow(0 8px 20px rgba(0,0,0,.6)) drop-shadow(0 0 22px rgba(212,160,67,.35));
-  transition:transform .3s ease,filter .3s ease;
-}
-.enter-btn-wrap:hover .enter-btn-img{
-  transform:scale(1.05);
-  filter:drop-shadow(0 8px 25px rgba(0,0,0,.7)) drop-shadow(0 0 45px rgba(255,200,80,.85));
-}
+.enter-btn-img{display:block;max-width:300px;width:75vw;height:auto;border:none;background:transparent;cursor:pointer;filter:drop-shadow(0 8px 20px rgba(0,0,0,.6)) drop-shadow(0 0 22px rgba(212,160,67,.35));transition:transform .3s ease,filter .3s ease;}
+.enter-btn-wrap:hover .enter-btn-img{transform:scale(1.05);filter:drop-shadow(0 8px 25px rgba(0,0,0,.7)) drop-shadow(0 0 45px rgba(255,200,80,.85));}
 .enter-btn-ring{position:absolute;inset:-20px;border-radius:100px;pointer-events:none;opacity:0;transition:opacity .3s;}
 .enter-btn-wrap:hover .enter-btn-ring{opacity:1;}
-.ring-particle{
-  position:absolute;width:5px;height:5px;border-radius:50%;
-  background:#fff5c2;box-shadow:0 0 10px #f8e6a0;
-  top:50%;left:50%;margin:-2.5px;
-  animation:ringOrbit var(--dur,2.6s) linear infinite;animation-delay:var(--delay,0s);
-}
-@keyframes ringOrbit{
-  from{transform:rotate(0deg) translateX(170px) rotate(0deg);}
-  to  {transform:rotate(360deg) translateX(170px) rotate(-360deg);}
-}
-
-/* ====== Chest 寶箱 ====== */
+.ring-particle{position:absolute;width:5px;height:5px;border-radius:50%;background:#fff5c2;box-shadow:0 0 10px #f8e6a0;top:50%;left:50%;margin:-2.5px;animation:ringOrbit var(--dur,2.6s) linear infinite;animation-delay:var(--delay,0s);}
+@keyframes ringOrbit{from{transform:rotate(0deg) translateX(170px) rotate(0deg);}to{transform:rotate(360deg) translateX(170px) rotate(-360deg);}}
 #screen-chest{justify-content:center;}
-.chest-stage{
-  position:relative;
-  width:min(560px,78vw);aspect-ratio:1;
-  display:flex;align-items:center;justify-content:center;
-}
-.chest-img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
-  filter:drop-shadow(0 25px 40px rgba(0,0,0,.8));
-  transition:opacity 1s ease, transform 1s ease;
-}
+.chest-stage{position:relative;width:min(560px,78vw);aspect-ratio:1;display:flex;align-items:center;justify-content:center;}
+.chest-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 25px 40px rgba(0,0,0,.8));transition:opacity 1s ease,transform 1s ease;}
 .chest-img-closed{opacity:1;transform:scale(1);}
 .chest-img-open{opacity:0;transform:scale(1.4);}
-.chest-stage.opened .chest-img-open{transform:scale(1.4);}
 #screen-chest.active .chest-img-closed{animation:chestShake .3s ease-in-out 3 .5s;}
 .chest-stage.opened .chest-img-closed{opacity:0;transition:opacity .8s ease;}
-.chest-stage.opened .chest-img-open{opacity:1;transition:opacity 1.2s ease .4s;}
-@keyframes chestShake{
-  0%,100%{transform:translate(0,0) rotate(0);}
-  25%{transform:translate(-4px,0) rotate(-1deg);}
-  75%{transform:translate(4px,0) rotate(1deg);}
-}
-.chest-glow{
-  position:absolute;inset:-20%;
-  background:radial-gradient(circle,rgba(255,200,80,.7) 0%,rgba(255,140,40,.4) 25%,transparent 60%);
-  opacity:0;transition:opacity 1.5s ease;z-index:-1;filter:blur(20px);
-}
+.chest-stage.opened .chest-img-open{opacity:1;transform:scale(1.4);transition:opacity 1.2s ease .4s;}
+@keyframes chestShake{0%,100%{transform:translate(0,0) rotate(0);}25%{transform:translate(-4px,0) rotate(-1deg);}75%{transform:translate(4px,0) rotate(1deg);}}
+.chest-glow{position:absolute;inset:-20%;background:radial-gradient(circle,rgba(255,200,80,.7) 0%,rgba(255,140,40,.4) 25%,transparent 60%);opacity:0;transition:opacity 1.5s ease;z-index:-1;filter:blur(20px);}
 .chest-stage.opened .chest-glow{opacity:1;animation:glowPulse 3s ease-in-out infinite;}
 @keyframes glowPulse{0%,100%{transform:scale(1);opacity:.75;}50%{transform:scale(1.18);opacity:1;}}
-
-/* 寶箱開啟噴出的金光粒子 */
-.burst-particle{
-  position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;
-  background:radial-gradient(circle,#fff 0%,#fff1b8 35%,transparent 70%);
-  box-shadow:0 0 14px #fff5c2;opacity:0;
-}
+.burst-particle{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#fff1b8 35%,transparent 70%);box-shadow:0 0 14px #fff5c2;opacity:0;}
 .chest-stage.opened .burst-particle{animation:burstUp 2.2s ease-out forwards;}
-@keyframes burstUp{
-  0% {opacity:0;transform:translate(-50%,-50%) scale(.3);}
-  15%{opacity:1;}
-  100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.2);}
-}
-.chest-continue{
-  position:absolute;bottom:6%;
-  font-family:"Cormorant Garamond","Noto Serif TC",serif;font-style:italic;
-  color:#caa86a;letter-spacing:.4em;font-size:14px;
-  opacity:0;cursor:pointer;
-  animation:fadeIn 1s ease 2.8s forwards;
-}
-@keyframes fadeIn{to{opacity:1;}}
-
-/* ====== Scroll 卷軸 ====== */
+@keyframes burstUp{0%{opacity:0;transform:translate(-50%,-50%) scale(.3);}15%{opacity:1;}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.2);}}
 #screen-scroll{align-items:center;justify-content:center;}
-.scroll-wrap{
-  position:relative;
-  height:min(880px,86vh);
-  aspect-ratio:819/1229;
-  max-width:90vw;
-  transform:translateY(-120vh) rotate(-6deg);opacity:0;
-}
+.scroll-wrap{position:relative;height:min(880px,86vh);aspect-ratio:819/1229;max-width:90vw;transform:translateY(-120vh) rotate(-6deg);opacity:0;}
 #screen-scroll.active .scroll-wrap{animation:scrollDrop 1.4s cubic-bezier(.34,1.5,.6,1) forwards;}
-@keyframes scrollDrop{
-  0%  {transform:translateY(-120vh) rotate(-6deg);opacity:0;}
-  60% {opacity:1;}
-  75% {transform:translateY(15px) rotate(2deg);}
-  100%{transform:translateY(0) rotate(0);opacity:1;}
-}
-.scroll-img{display:block;width:100%;height:100%;object-fit:contain;
-  filter:drop-shadow(0 22px 40px rgba(0,0,0,.7));}
-.scroll-content{
-  position:absolute;
-  inset:28% 20% 24% 20%;
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-  color:var(--ink);
-  text-align:center;
-}
-.scroll-title{
-  font-family:"Noto Serif TC",serif;font-weight:900;
-  font-size:clamp(16px,1.7vw,22px);
-  text-align:center;margin:0 0 26px;letter-spacing:.12em;
-  color:#3a1e08;
-  white-space:nowrap;
-}
-.scroll-list{
-  list-style:none;margin:0;padding:0;
-  display:flex;flex-direction:column;align-items:stretch;gap:18px;
-  width:100%;
-  max-width:300px;
-}
-.scroll-list li{
-  font-family:"Noto Serif TC",serif;
-  font-size:clamp(13px,1.4vw,17px);
-  font-weight:500;color:#2a1408;
-  display:flex;align-items:center;justify-content:center;gap:12px;
-  padding:6px 10px;
-  border-bottom:1px dashed rgba(60,38,16,.4);
-  line-height:1.5;
-  white-space:nowrap;
-}
+@keyframes scrollDrop{0%{transform:translateY(-120vh) rotate(-6deg);opacity:0;}60%{opacity:1;}75%{transform:translateY(15px) rotate(2deg);}100%{transform:translateY(0) rotate(0);opacity:1;}}
+.scroll-img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 22px 40px rgba(0,0,0,.7));}
+.scroll-content{position:absolute;inset:28% 20% 24% 20%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;color:var(--ink);text-align:center;}
+.scroll-title{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(16px,1.7vw,22px);text-align:center;margin:0 0 26px;letter-spacing:.12em;color:#3a1e08;white-space:nowrap;}
+.scroll-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:stretch;gap:18px;width:100%;max-width:300px;}
+.scroll-list li{font-family:"Noto Serif TC",serif;font-size:clamp(13px,1.4vw,17px);font-weight:500;color:#2a1408;display:flex;align-items:center;justify-content:center;gap:12px;padding:6px 10px;border-bottom:1px dashed rgba(60,38,16,.4);line-height:1.5;white-space:nowrap;}
 .scroll-list li:last-child{border-bottom:none;}
 .scroll-list li .icon{font-size:1.25em;flex-shrink:0;}
-
-/* ====== Time 沙漏 ====== */
 #screen-time{flex-direction:column;gap:0;justify-content:center;}
 #screen-time .time-card{margin-top:-180px;position:relative;z-index:2;}
-.hourglass-stage{position:relative;width:min(560px,72vw);aspect-ratio:.72;
-  transform:scale(.25);opacity:0;
-  transition:transform 1.2s cubic-bezier(.34,1.4,.6,1),opacity .9s ease;}
+.hourglass-stage{position:relative;width:min(560px,72vw);aspect-ratio:.72;transform:scale(.25);opacity:0;transition:transform 1.2s cubic-bezier(.34,1.4,.6,1),opacity .9s ease;}
 #screen-time.active .hourglass-stage{transform:scale(1);opacity:1;}
-.hourglass-img{width:100%;height:100%;object-fit:contain;display:block;
-  filter:drop-shadow(0 20px 30px rgba(0,0,0,.7)) drop-shadow(0 0 30px rgba(255,180,80,.5));}
-.hg-aura{position:absolute;inset:-12%;z-index:-1;
-  background:radial-gradient(ellipse,rgba(255,180,80,.5),transparent 60%);
-  filter:blur(30px);animation:glowPulse 3.5s ease-in-out infinite;}
-.time-card{
-  background:
-    radial-gradient(ellipse at 30% 25%,rgba(255,235,180,.3),transparent 60%),
-    linear-gradient(180deg,#ecd5a6,#c9a872);
-  border:2px solid #5a3a18;border-radius:6px;
-  padding:18px 36px;max-width:560px;text-align:center;color:var(--ink);
-  box-shadow:0 12px 30px rgba(0,0,0,.6);
-  opacity:0;transform:translateY(28px);
-  transition:opacity .8s ease .8s,transform .8s ease .8s;
-}
+.hourglass-img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 20px 30px rgba(0,0,0,.7)) drop-shadow(0 0 30px rgba(255,180,80,.5));}
+.hg-aura{position:absolute;inset:-12%;z-index:-1;background:radial-gradient(ellipse,rgba(255,180,80,.5),transparent 60%);filter:blur(30px);animation:glowPulse 3.5s ease-in-out infinite;}
+.time-card{background:radial-gradient(ellipse at 30% 25%,rgba(255,235,180,.3),transparent 60%),linear-gradient(180deg,#ecd5a6,#c9a872);border:2px solid #5a3a18;border-radius:6px;padding:18px 36px;max-width:560px;text-align:center;color:var(--ink);box-shadow:0 12px 30px rgba(0,0,0,.6);opacity:0;transform:translateY(28px);transition:opacity .8s ease .8s,transform .8s ease .8s;}
 #screen-time.active .time-card{opacity:1;transform:translateY(0);}
-.time-card-title{
-  font-family:"Noto Serif TC",serif;font-weight:700;
-  font-size:clamp(18px,2vw,24px);margin:0 0 12px;letter-spacing:.2em;
-}
-.time-row{
-  font-family:"Noto Serif TC",serif;font-weight:600;
-  font-size:clamp(15px,1.7vw,21px);
-  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
-}
+.time-card-title{font-family:"Noto Serif TC",serif;font-weight:700;font-size:clamp(18px,2vw,24px);margin:0 0 12px;letter-spacing:.2em;}
+.time-row{font-family:"Noto Serif TC",serif;font-weight:600;font-size:clamp(15px,1.7vw,21px);display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
 .time-row .arrow{color:#5b3a18;}
-
-/* ====== Map 藏寶圖 ====== */
 #screen-map{justify-content:center;}
-.map-stage{
-  position:relative;width:min(1100px,96vw);aspect-ratio:1229/819;
-}
-.map-bg-img{
-  display:block;width:100%;height:100%;object-fit:contain;
-  filter:drop-shadow(0 25px 45px rgba(0,0,0,.75));
-}
-.clue-paper{
-  position:absolute;width:21%;
-  opacity:0;transform:scale(.5) rotate(0);
-  transition:opacity .7s ease,transform .8s cubic-bezier(.34,1.4,.6,1);
-}
+.map-stage{position:relative;width:min(1100px,96vw);aspect-ratio:1229/819;}
+.map-bg-img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 25px 45px rgba(0,0,0,.75));}
+.clue-paper{position:absolute;width:21%;opacity:0;transform:scale(.5) rotate(0);transition:opacity .7s ease,transform .8s cubic-bezier(.34,1.4,.6,1);}
 #screen-map.active .clue-paper{opacity:1;}
 #screen-map.active .clue-paper.c1{transition-delay:.4s;transform:scale(1) rotate(-5deg);}
 #screen-map.active .clue-paper.c2{transition-delay:.9s;transform:scale(1) rotate(3deg);}
 #screen-map.active .clue-paper.c3{transition-delay:1.4s;transform:scale(1) rotate(-3deg);}
-.clue-paper img{width:100%;height:auto;display:block;
-  filter:drop-shadow(0 6px 12px rgba(0,0,0,.55));}
-.clue-paper .clue-content{
-  position:absolute;inset:18% 14% 18% 14%;
-  font-family:"Noto Serif TC",serif;font-weight:700;color:var(--ink);
-  font-size:clamp(10px,1vw,13px);line-height:1.45;
-  display:flex;flex-direction:column;justify-content:center;
-}
-.clue-paper .clue-num{
-  font-family:"IM Fell English SC","Cinzel",serif;
-  font-weight:700;font-size:1.2em;color:#6e2818;margin-bottom:4px;letter-spacing:.1em;
-}
+.clue-paper img{width:100%;height:auto;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.55));}
+.clue-paper .clue-content{position:absolute;inset:18% 14% 18% 14%;font-family:"Noto Serif TC",serif;font-weight:700;color:var(--ink);font-size:clamp(10px,1vw,13px);line-height:1.45;display:flex;flex-direction:column;justify-content:center;}
+.clue-paper .clue-num{font-family:"IM Fell English SC","Cinzel",serif;font-weight:700;font-size:1.2em;color:#6e2818;margin-bottom:4px;letter-spacing:.1em;}
 .clue-paper.c1{top:4%;left:3%;}
 .clue-paper.c2{top:4%;right:3%;}
 .clue-paper.c3{bottom:10%;left:3%;}
-.map-gift{
-  position:absolute;bottom:6%;right:5%;width:17%;height:auto;
-  animation:giftBounce 3s ease-in-out infinite;
-  filter:drop-shadow(0 10px 18px rgba(0,0,0,.5));
-}
-@keyframes giftBounce{
-  0%,88%,100%{transform:translateY(0) rotate(0);}
-  92%{transform:translateY(-12px) rotate(-4deg);}
-  96%{transform:translateY(0) rotate(4deg);}
-}
-
-/* ====== Winners 得獎名單 ====== */
+.map-gift{position:absolute;bottom:6%;right:5%;width:17%;height:auto;animation:giftBounce 3s ease-in-out infinite;filter:drop-shadow(0 10px 18px rgba(0,0,0,.5));}
+@keyframes giftBounce{0%,88%,100%{transform:translateY(0) rotate(0);}92%{transform:translateY(-12px) rotate(-4deg);}96%{transform:translateY(0) rotate(4deg);}}
 #screen-winners{justify-content:center;}
-.winners-stage{
-  position:relative;width:min(1000px,96vw);aspect-ratio:1.4;
-}
-.winners-frame{
-  width:100%;height:100%;object-fit:contain;display:block;
-  filter:drop-shadow(0 25px 40px rgba(0,0,0,.7));
-}
-.winners-photos{
-  position:absolute;
-  inset:16% 8% 14% 8%;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  grid-template-rows:repeat(2,1fr);
-  gap:14px;
-}
-.photo-slot{
-  position:relative;width:100%;aspect-ratio:1;
-  filter:drop-shadow(0 4px 8px rgba(0,0,0,.4));
-}
+.winners-stage{position:relative;width:min(1000px,96vw);aspect-ratio:1.4;}
+.winners-frame{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 25px 40px rgba(0,0,0,.7));}
+.winners-photos{position:absolute;inset:16% 8% 14% 8%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:14px;}
+.photo-slot{position:relative;width:100%;aspect-ratio:1;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4));}
 .photo-slot:nth-child(4){grid-column:1/2;grid-row:2;}
 .photo-slot:nth-child(5){grid-column:2/3;grid-row:2;}
 .photo-slot:nth-child(n+6){display:none;}
-.photo-frame-img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
-  display:block;z-index:2;pointer-events:none;
-}
-.photo-content{
-  position:absolute;inset:14%;z-index:1;
-  background-size:cover;background-position:center;
-  border-radius:2px;
-}
-.photo-label{
-  position:absolute;bottom:6%;left:14%;right:14%;z-index:3;
-  font-family:"Noto Serif TC",serif;font-weight:700;text-align:center;
-  font-size:clamp(10px,1vw,13px);color:#f8e6a0;
-  text-shadow:0 0 4px rgba(0,0,0,.85),0 0 8px rgba(0,0,0,.7);
-}
-.photo-empty{
-  position:absolute;inset:14%;z-index:1;
-  display:flex;align-items:center;justify-content:center;
-  color:#8a6535;font-size:12px;font-style:italic;opacity:.7;
-}
-
-/* ====== 右下浮動按鈕（每個場景的下一步） ====== */
-.nav-action-btn{
-  position:fixed;bottom:30px;right:30px;
-  width:130px;height:auto;
-  z-index:13;
-  cursor:pointer;border:none;background:transparent;padding:0;
-  opacity:0;transform:translateY(20px);
-  transition:opacity .6s ease,transform .6s ease;
-  filter:drop-shadow(0 8px 16px rgba(0,0,0,.65));
-}
-.nav-action-btn img{width:100%;height:auto;display:block;
-  transition:filter .2s ease,transform .2s ease;}
-.screen.active .nav-action-btn{
-  opacity:1;transform:translateY(0);transition-delay:1.4s;
-}
-.nav-action-btn:hover img{
-  transform:scale(1.07);
-  filter:drop-shadow(0 0 24px rgba(255,200,80,.7));
-}
-
-/* 卷軸畫面的禮物盒（右下浮動 → 被沙漏按鈕推開） */
-.floating-gift{
-  position:fixed;bottom:170px;right:30px;
-  width:84px;height:auto;z-index:12;
-  animation:giftBounce 4s ease-in-out infinite;
-  filter:drop-shadow(0 8px 14px rgba(0,0,0,.5));
-  pointer-events:none;
-  opacity:0;transition:opacity .6s ease;
-}
+.photo-frame-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;z-index:2;pointer-events:none;}
+/* 改用 img 標籤顯示照片，不用 CSS background-image */
+.photo-content{position:absolute;inset:14%;z-index:1;overflow:hidden;border-radius:2px;}
+.photo-content img{width:100%;height:100%;object-fit:cover;display:block;}
+.photo-label{position:absolute;bottom:6%;left:14%;right:14%;z-index:3;font-family:"Noto Serif TC",serif;font-weight:700;text-align:center;font-size:clamp(10px,1vw,13px);color:#f8e6a0;text-shadow:0 0 4px rgba(0,0,0,.85),0 0 8px rgba(0,0,0,.7);}
+.photo-empty{position:absolute;inset:14%;z-index:1;display:flex;align-items:center;justify-content:center;color:#8a6535;font-size:12px;font-style:italic;opacity:.7;}
+.nav-action-btn{position:fixed;bottom:30px;right:30px;width:130px;height:auto;z-index:13;cursor:pointer;border:none;background:transparent;padding:0;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;filter:drop-shadow(0 8px 16px rgba(0,0,0,.65));}
+.nav-action-btn img{width:100%;height:auto;display:block;transition:filter .2s ease,transform .2s ease;}
+.screen.active .nav-action-btn{opacity:1;transform:translateY(0);transition-delay:1.4s;}
+.nav-action-btn:hover img{transform:scale(1.07);filter:drop-shadow(0 0 24px rgba(255,200,80,.7));}
+.floating-gift{position:fixed;bottom:170px;right:30px;width:84px;height:auto;z-index:12;animation:giftBounce 4s ease-in-out infinite;filter:drop-shadow(0 8px 14px rgba(0,0,0,.5));pointer-events:none;opacity:0;transition:opacity .6s ease;}
 .screen.active .floating-gift{opacity:1;transition-delay:1.2s;}
-
-/* ====== 工具按鈕（音樂 + 後台 + 全功能選單） ====== */
-.bgm-toggle{
-  position:fixed;top:20px;left:20px;z-index:100;
-  width:38px;height:38px;border-radius:50%;
-  background:rgba(8,12,30,.6);border:1px solid rgba(212,160,67,.4);
-  color:#f8e6a0;font-size:16px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  backdrop-filter:blur(8px);
-  transition:all .2s ease;
-}
+.bgm-toggle{position:fixed;top:20px;left:20px;z-index:100;width:38px;height:38px;border-radius:50%;background:rgba(8,12,30,.6);border:1px solid rgba(212,160,67,.4);color:#f8e6a0;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);transition:all .2s ease;}
 .bgm-toggle:hover{background:rgba(212,160,67,.2);transform:scale(1.08);}
 .bgm-toggle.muted{opacity:.55;}
-.nav-menu{
-  position:fixed;top:20px;right:20px;z-index:100;
-  display:flex;gap:8px;
-  background:rgba(8,12,30,.55);
-  border:1px solid rgba(212,160,67,.35);
-  border-radius:30px;padding:6px 10px;backdrop-filter:blur(8px);
-  opacity:0;pointer-events:none;transition:opacity .4s ease;
-}
+.nav-menu{position:fixed;top:20px;right:20px;z-index:100;display:flex;gap:8px;background:rgba(8,12,30,.55);border:1px solid rgba(212,160,67,.35);border-radius:30px;padding:6px 10px;backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .4s ease;}
 .nav-menu.visible{opacity:1;pointer-events:auto;}
-.nav-menu button{
-  width:34px;height:34px;border-radius:50%;
-  background:transparent;border:1px solid rgba(212,160,67,.35);
-  color:#f8e6a0;font-size:15px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .25s ease;
-}
+.nav-menu button{width:34px;height:34px;border-radius:50%;background:transparent;border:1px solid rgba(212,160,67,.35);color:#f8e6a0;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s ease;}
 .nav-menu button:hover{background:rgba(212,160,67,.18);box-shadow:0 0 12px rgba(212,160,67,.5);}
 .nav-menu button.active{background:linear-gradient(180deg,#d4a043,#8a5a18);color:#1a0e02;border-color:#f8e6a0;}
-.admin-link{
-  position:fixed;bottom:8px;right:12px;font-size:10px;
-  color:rgba(212,160,67,.4);text-decoration:none;letter-spacing:.2em;
-  z-index:100;font-family:"Cinzel",serif;
-}
+.admin-link{position:fixed;bottom:8px;right:12px;font-size:10px;color:rgba(212,160,67,.4);text-decoration:none;letter-spacing:.2em;z-index:100;font-family:"Cinzel",serif;}
 .admin-link:hover{color:#f8e6a0;}
-
-/* RWD */
 @media(max-width:760px){
-  .candle{transform:scale(.7);}
   .floating-gift{width:62px;bottom:140px;right:18px;}
   .nav-action-btn{width:96px;bottom:20px;right:18px;}
-  .sound-toggle{top:14px;left:14px;}
   .nav-menu{right:60px;top:14px;}
 }
 </style>
 </head>
-
 <body>
-
-<!-- 背景 -->
 <div class="bg-sky"></div>
 <div class="bg-stars" id="starfield"></div>
 <div class="bg-particles" id="particles"></div>
@@ -509,16 +180,13 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
 <div class="shooting-star" style="top:32%;left:-10%;--delay:9s;--dur:14s;"></div>
 <div class="shooting-star" style="top:55%;left:-8%;--delay:18s;--dur:14s;"></div>
 
-<!-- 飄過的三色小精靈 -->
 <img src="fairy_orange.png" alt="" class="fairy fairy-orange"/>
 <img src="fairy_green.png"  alt="" class="fairy fairy-green"/>
 <img src="fairy_blue.png"   alt="" class="fairy fairy-blue"/>
 
-<!-- 背景音樂 -->
 <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
 <button class="bgm-toggle" id="bgmToggle" title="背景音樂">🔊</button>
 
-<!-- 工具按鈕 -->
 <nav class="nav-menu" id="navMenu">
   <button data-go="scroll" title="本期寶藏">📜</button>
   <button data-go="time" title="活動時間">⏳</button>
@@ -528,7 +196,7 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
 </nav>
 <a href="admin.html" target="_blank" class="admin-link">⚙ ADMIN</a>
 
-<!-- ============ 1. 首頁 ============ -->
+<!-- 1. 首頁 -->
 <section class="screen active" id="screen-entry">
   <h1 class="entry-title" id="entryTitle">✨ 勝海藏寶季 ✨</h1>
   <div class="entry-subtitle" id="entrySubtitle">探索辦公室中的神秘寶藏</div>
@@ -536,7 +204,7 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
     <img src="01_office_map.png" alt="3D 公司地圖" class="entry-map" id="entryMap"/>
   </div>
   <div class="enter-btn-wrap" id="enterBtn">
-    <img src="12_enter_btn.png" alt="進入魔法世界" class="enter-btn-img"/>
+    <img src="12_enter_btn.png" alt="進入" class="enter-btn-img"/>
     <div class="enter-btn-ring">
       <div class="ring-particle" style="--dur:2.6s;--delay:0s;"></div>
       <div class="ring-particle" style="--dur:3s;--delay:.5s;"></div>
@@ -546,17 +214,16 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
   </div>
 </section>
 
-<!-- ============ 2. 寶箱開啟 ============ -->
+<!-- 2. 寶箱 -->
 <section class="screen" id="screen-chest">
   <div class="chest-stage" id="chestStage">
     <div class="chest-glow"></div>
     <img src="02_chest_closed.png" alt="關閉的寶箱" class="chest-img chest-img-closed"/>
-    <img src="03_chest_open.png" alt="打開的寶箱" class="chest-img chest-img-open"/>
-    <!-- 開啟噴出的金粒子（JS 注入） -->
+    <img src="03_chest_open.png"   alt="打開的寶箱" class="chest-img chest-img-open"/>
   </div>
 </section>
 
-<!-- ============ 3. 卷軸：本期寶藏 ============ -->
+<!-- 3. 卷軸 -->
 <section class="screen" id="screen-scroll">
   <div class="scroll-wrap">
     <img src="11_scroll.png" alt="藏寶清單卷軸" class="scroll-img"/>
@@ -571,7 +238,7 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
   </button>
 </section>
 
-<!-- ============ 4. 沙漏：活動時間 ============ -->
+<!-- 4. 沙漏 -->
 <section class="screen" id="screen-time">
   <div class="hourglass-stage">
     <div class="hg-aura"></div>
@@ -590,7 +257,7 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
   </button>
 </section>
 
-<!-- ============ 5. 藏寶圖 ============ -->
+<!-- 5. 藏寶圖 -->
 <section class="screen" id="screen-map">
   <div class="map-stage">
     <img src="06_map_bg.png" alt="藏寶地圖底圖" class="map-bg-img"/>
@@ -622,7 +289,7 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
   </button>
 </section>
 
-<!-- ============ 6. 得獎名單 ============ -->
+<!-- 6. 得獎名單 -->
 <section class="screen" id="screen-winners">
   <div class="winners-stage">
     <img src="13_winners_frame.png" alt="得獎名單木框" class="winners-frame"/>
@@ -636,228 +303,221 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
 <script>
 let C = window.SHH_CONFIG;
 
-/* ===== 星空 ===== */
+/* 星空 */
 (function(){
   const sf = document.getElementById('starfield');
-  for(let i=0; i<140; i++){
-    const s = document.createElement('div');
-    s.className = 'star' + (Math.random()<.2 ? ' big' : '');
-    s.style.left = Math.random()*100 + '%';
-    s.style.top  = Math.random()*100 + '%';
-    s.style.setProperty('--dur', (2 + Math.random()*4) + 's');
-    s.style.setProperty('--delay', Math.random()*4 + 's');
+  for(let i=0;i<140;i++){
+    const s=document.createElement('div');
+    s.className='star'+(Math.random()<.2?' big':'');
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.setProperty('--dur',(2+Math.random()*4)+'s');
+    s.style.setProperty('--delay',Math.random()*4+'s');
     sf.appendChild(s);
   }
 })();
 
-/* ===== 飄浮金粒 ===== */
+/* 飄浮金粒 */
 (function(){
-  const pp = document.getElementById('particles');
+  const pp=document.getElementById('particles');
   function spawn(){
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left = Math.random()*100 + '%';
-    p.style.bottom = '-10px';
-    p.style.setProperty('--dx', ((Math.random()-.5)*200) + 'px');
-    p.style.setProperty('--dur', (10 + Math.random()*12) + 's');
-    p.style.width = p.style.height = (3 + Math.random()*4) + 'px';
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.left=Math.random()*100+'%';
+    p.style.bottom='-10px';
+    p.style.setProperty('--dx',((Math.random()-.5)*200)+'px');
+    p.style.setProperty('--dur',(10+Math.random()*12)+'s');
+    p.style.width=p.style.height=(3+Math.random()*4)+'px';
     pp.appendChild(p);
-    setTimeout(()=>p.remove(), 22000);
+    setTimeout(()=>p.remove(),22000);
   }
-  for(let i=0; i<18; i++) setTimeout(spawn, Math.random()*9000);
-  setInterval(spawn, 550);
+  for(let i=0;i<18;i++) setTimeout(spawn,Math.random()*9000);
+  setInterval(spawn,550);
 })();
 
-/* ===== 螢幕切換 ===== */
-const screens = {
-  entry:    document.getElementById('screen-entry'),
-  chest:    document.getElementById('screen-chest'),
-  scroll:   document.getElementById('screen-scroll'),
-  time:     document.getElementById('screen-time'),
-  map:      document.getElementById('screen-map'),
-  winners:  document.getElementById('screen-winners'),
+/* 螢幕切換 */
+const screens={
+  entry:document.getElementById('screen-entry'),
+  chest:document.getElementById('screen-chest'),
+  scroll:document.getElementById('screen-scroll'),
+  time:document.getElementById('screen-time'),
+  map:document.getElementById('screen-map'),
+  winners:document.getElementById('screen-winners'),
 };
-const navMenu = document.getElementById('navMenu');
+const navMenu=document.getElementById('navMenu');
 
 function go(name){
-  Object.entries(screens).forEach(([k, el]) => {
-    el.classList.toggle('active', k === name);
-  });
-  if (name !== 'chest') {
-    document.getElementById('chestStage').classList.remove('opened');
-  }
-  navMenu.classList.toggle('visible', name !== 'entry' && name !== 'chest');
-  navMenu.querySelectorAll('button').forEach(b =>
-    b.classList.toggle('active', b.dataset.go === name)
-  );
-  if (name === 'chest') startChestSequence();
-  if (name === 'winners') renderWinners();
+  Object.entries(screens).forEach(([k,el])=>el.classList.toggle('active',k===name));
+  if(name!=='chest') document.getElementById('chestStage').classList.remove('opened');
+  navMenu.classList.toggle('visible',name!=='entry'&&name!=='chest');
+  navMenu.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.go===name));
+  if(name==='chest') startChestSequence();
+  if(name==='winners') renderWinners();
 }
 
-document.querySelectorAll('[data-go]').forEach(b => {
-  b.addEventListener('click', () => go(b.dataset.go));
-});
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+document.getElementById('enterBtn').addEventListener('click',()=>go('chest'));
 
-/* ===== 進入按鈕 ===== */
-document.getElementById('enterBtn').addEventListener('click', () => {
-  go('chest');
-});
-
-/* ===== 寶箱序列 ===== */
-let chestTimer = null;
+/* 寶箱序列 */
+let chestTimer=null;
 function startChestSequence(){
-  const stage = document.getElementById('chestStage');
+  const stage=document.getElementById('chestStage');
   stage.classList.remove('opened');
-  // 清掉舊的爆破粒子
-  stage.querySelectorAll('.burst-particle').forEach(p => p.remove());
-  // 1.8 秒後開啟
-  setTimeout(() => {
+  stage.querySelectorAll('.burst-particle').forEach(p=>p.remove());
+  setTimeout(()=>{
     stage.classList.add('opened');
-    // 噴出 22 顆金粒子
-    for (let i = 0; i < 22; i++) {
-      const sp = document.createElement('div');
-      sp.className = 'burst-particle';
-      const a = Math.random() * Math.PI * 2;
-      const d = 100 + Math.random() * 240;
-      sp.style.setProperty('--dx', (Math.cos(a) * d) + 'px');
-      sp.style.setProperty('--dy', (-Math.abs(Math.sin(a)) * d - 30) + 'px');
-      sp.style.animationDelay = (0.8 + Math.random() * 0.6) + 's';
+    for(let i=0;i<22;i++){
+      const sp=document.createElement('div');
+      sp.className='burst-particle';
+      const a=Math.random()*Math.PI*2;
+      const d=100+Math.random()*240;
+      sp.style.setProperty('--dx',(Math.cos(a)*d)+'px');
+      sp.style.setProperty('--dy',(-Math.abs(Math.sin(a))*d-30)+'px');
+      sp.style.animationDelay=(0.8+Math.random()*0.6)+'s';
       stage.appendChild(sp);
     }
-  }, 1800);
-  // 自動進入卷軸
+  },1800);
   clearTimeout(chestTimer);
-  chestTimer = setTimeout(() => go('scroll'), 5500);
+  chestTimer=setTimeout(()=>go('scroll'),5500);
 }
 
-/* ===== 3D tilt on 公司地圖 ===== */
-const mapWrap = document.getElementById('mapWrap');
-const entryMap = document.getElementById('entryMap');
-mapWrap.addEventListener('mousemove', (e) => {
-  const r = mapWrap.getBoundingClientRect();
-  const x = (e.clientX - r.left - r.width/2) / r.width;
-  const y = (e.clientY - r.top - r.height/2) / r.height;
-  entryMap.style.transform = `rotateY(${x*12}deg) rotateX(${-y*9}deg)`;
+/* 3D tilt */
+const mapWrap=document.getElementById('mapWrap');
+const entryMap=document.getElementById('entryMap');
+mapWrap.addEventListener('mousemove',(e)=>{
+  const r=mapWrap.getBoundingClientRect();
+  const x=(e.clientX-r.left-r.width/2)/r.width;
+  const y=(e.clientY-r.top-r.height/2)/r.height;
+  entryMap.style.transform=`rotateY(${x*12}deg) rotateX(${-y*9}deg)`;
 });
-mapWrap.addEventListener('mouseleave', () => {
-  entryMap.style.transform = 'rotateY(0) rotateX(0)';
-});
+mapWrap.addEventListener('mouseleave',()=>entryMap.style.transform='rotateY(0) rotateX(0)');
 
-/* ===== 填入資料（從 C 套用到 DOM，可重複呼叫） ===== */
+/* 填入資料 */
 function applyData(data){
-  C = Object.assign({}, C, data);
-  if (data.period) C.period = Object.assign({}, C.period, data.period);
+  C=Object.assign({},C,data);
+  if(data.period) C.period=Object.assign({},C.period,data.period);
 
-  document.getElementById('entryTitle').textContent = '✨ ' + C.eventTitle + ' ✨';
-  document.getElementById('entrySubtitle').textContent = C.eventSubtitle;
+  document.getElementById('entryTitle').textContent='✨ '+C.eventTitle+' ✨';
+  document.getElementById('entrySubtitle').textContent=C.eventSubtitle;
 
-  const scrollList = document.getElementById('scrollList');
-  scrollList.innerHTML = '';
-  (C.treasures || []).forEach(t => {
-    const li = document.createElement('li');
-    li.innerHTML = `<span class="icon">${t.icon || '🎁'}</span><span>${esc(t.name)}</span>`;
+  const scrollList=document.getElementById('scrollList');
+  scrollList.innerHTML='';
+  (C.treasures||[]).forEach(t=>{
+    const li=document.createElement('li');
+    li.innerHTML='<span class="icon">'+(t.icon||'🎁')+'</span><span>'+esc(t.name)+'</span>';
     scrollList.appendChild(li);
   });
 
-  document.getElementById('timeStart').textContent = C.period.start || '';
-  document.getElementById('timeEnd').textContent = C.period.end || '';
+  document.getElementById('timeStart').textContent=C.period.start||'';
+  document.getElementById('timeEnd').textContent=C.period.end||'';
 
-  (C.clues || []).forEach((clue, i) => {
-    const el = document.getElementById('clue' + (i+1) + 'Text');
-    if (el) el.textContent = clue;
+  (C.clues||[]).forEach((clue,i)=>{
+    const el=document.getElementById('clue'+(i+1)+'Text');
+    if(el) el.textContent=clue;
   });
 
-  renderWinners(data.winners);
+  if(Array.isArray(data.winners)){
+    window._cloudWinners=data.winners;
+    renderWinners();
+  }
 }
 
-let cloudWinners = null;
-function renderWinners(winnersFromCloud){
-  if (Array.isArray(winnersFromCloud)) cloudWinners = winnersFromCloud;
-  const grid = document.getElementById('winnersPhotos');
-  grid.innerHTML = '';
-  const winners = cloudWinners || [];
-  for (let i = 0; i < 5; i++) {
-    const slot = document.createElement('div');
-    slot.className = 'photo-slot';
-    const w = winners[i];
-    if (w && w.img) {
-      slot.innerHTML = `
-        <div class="photo-content" style="background-image:url('${w.img}');"></div>
-        <img src="14_photo_frame.png" alt="相框" class="photo-frame-img"/>
-        ${w.winner ? `<div class="photo-label">${esc(w.winner)}</div>` : ''}
-      `;
+/* 得獎名單 — 改用 <img src> 不用 background-image */
+function renderWinners(){
+  const grid=document.getElementById('winnersPhotos');
+  if(!grid) return;
+  grid.innerHTML='';
+  const winners=window._cloudWinners||[];
+  for(let i=0;i<5;i++){
+    const slot=document.createElement('div');
+    slot.className='photo-slot';
+    const w=winners[i];
+    if(w&&w.img){
+      // 用 DOM API 建立 img 元素，避免 innerHTML 截斷超長 data URL
+      const content=document.createElement('div');
+      content.className='photo-content';
+      const photo=document.createElement('img');
+      photo.src=w.img;
+      photo.alt='得獎合照';
+      content.appendChild(photo);
+
+      const frame=document.createElement('img');
+      frame.src='14_photo_frame.png';
+      frame.alt='相框';
+      frame.className='photo-frame-img';
+
+      slot.appendChild(content);
+      slot.appendChild(frame);
+
+      if(w.winner){
+        const lbl=document.createElement('div');
+        lbl.className='photo-label';
+        lbl.textContent=w.winner;
+        slot.appendChild(lbl);
+      }
     } else {
-      slot.innerHTML = `
-        <div class="photo-empty">（待補）</div>
-        <img src="14_photo_frame.png" alt="相框" class="photo-frame-img"/>
-      `;
+      const empty=document.createElement('div');
+      empty.className='photo-empty';
+      empty.textContent='（待補）';
+      const frame=document.createElement('img');
+      frame.src='14_photo_frame.png';
+      frame.alt='相框';
+      frame.className='photo-frame-img';
+      slot.appendChild(empty);
+      slot.appendChild(frame);
     }
     grid.appendChild(slot);
   }
 }
-// 用預設值先渲染一次（讓畫面不空白），等下 Firebase 拿到資料會再覆蓋
+
+window._cloudWinners=null;
 applyData(C);
-// 把 applyData 開到 window，讓底下的 Firebase module 可以呼叫
-window.__applyData = applyData;
+window.__applyData=applyData;
 
 function esc(s){
-  return String(s).replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+  return String(s).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
 }
 
-/* ===== 背景音樂 ===== */
-const bgm = document.getElementById('bgm');
-const bgmToggle = document.getElementById('bgmToggle');
-bgm.volume = 0.35;
-let bgmStarted = false;
+/* 背景音樂 */
+const bgm=document.getElementById('bgm');
+const bgmToggle=document.getElementById('bgmToggle');
+bgm.volume=0.35;
+let bgmStarted=false;
 function startBgm(){
-  if (bgmStarted) return;
-  bgm.play().then(() => { bgmStarted = true; }).catch(()=>{});
+  if(bgmStarted) return;
+  bgm.play().then(()=>{bgmStarted=true;}).catch(()=>{});
 }
-// 第一次使用者互動就播放（瀏覽器要求 user gesture）
-['click','touchstart','keydown'].forEach(ev =>
-  window.addEventListener(ev, startBgm, { once: true })
-);
-bgmToggle.addEventListener('click', (e) => {
+['click','touchstart','keydown'].forEach(ev=>window.addEventListener(ev,startBgm,{once:true}));
+bgmToggle.addEventListener('click',(e)=>{
   e.stopPropagation();
-  bgm.muted = !bgm.muted;
-  bgmToggle.textContent = bgm.muted ? '🔇' : '🔊';
-  bgmToggle.classList.toggle('muted', bgm.muted);
-  if (!bgm.muted) startBgm();
+  bgm.muted=!bgm.muted;
+  bgmToggle.textContent=bgm.muted?'🔇':'🔊';
+  bgmToggle.classList.toggle('muted',bgm.muted);
+  if(!bgm.muted) startBgm();
 });
-
 </script>
 
-<!-- ===== Firebase 連線：即時讀取雲端資料 ===== -->
+<!-- Firebase -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, doc, onSnapshot }
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBbrRCdtd1Gol_jrLaRngMJ6ND5VVsGjsw",
-  authDomain: "shenghai-treasure.firebaseapp.com",
-  projectId: "shenghai-treasure",
-  storageBucket: "shenghai-treasure.firebasestorage.app",
-  messagingSenderId: "629946354960",
-  appId: "1:629946354960:web:d549ad0e4d36f3c395a995"
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import{getFirestore,doc,onSnapshot}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+const firebaseConfig={
+  apiKey:"AIzaSyBbrRCdtd1Gol_jrLaRngMJ6ND5VVsGjsw",
+  authDomain:"shenghai-treasure.firebaseapp.com",
+  projectId:"shenghai-treasure",
+  storageBucket:"shenghai-treasure.firebasestorage.app",
+  messagingSenderId:"629946354960",
+  appId:"1:629946354960:web:d549ad0e4d36f3c395a995"
 };
-
-try {
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const docRef = doc(db, "site", "config");
-  // 即時監聽：後台改了，所有開著前台的人會自動更新
-  onSnapshot(docRef, (snap) => {
-    if (snap.exists() && typeof window.__applyData === 'function') {
+try{
+  const app=initializeApp(firebaseConfig);
+  const db=getFirestore(app);
+  onSnapshot(doc(db,"site","config"),(snap)=>{
+    if(snap.exists()&&typeof window.__applyData==='function'){
       window.__applyData(snap.data());
     }
-  }, (err) => {
-    console.warn('Firestore listen error:', err);
-  });
-} catch(e) {
-  console.warn('Firebase init failed, using local default:', e);
-}
+  },(err)=>{console.warn('Firestore error:',err);});
+}catch(e){console.warn('Firebase init failed:',e);}
 </script>
-
 </body>
 </html>
