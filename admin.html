@@ -23,209 +23,76 @@ body{
     radial-gradient(circle at 50% 55%, #0d1336 0%, #050818 75%);
   padding:32px 20px 80px;
 }
-
-/* ===== 頂部 ===== */
 header{max-width:1100px;margin:0 auto 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
-header .title-block h1{
-  font-family:"Cinzel",serif;
-  font-size:30px;letter-spacing:.15em;font-weight:700;margin:0;
-  text-shadow:0 0 18px rgba(232,200,105,.5);
-}
+header .title-block h1{font-family:"Cinzel",serif;font-size:30px;letter-spacing:.15em;font-weight:700;margin:0;text-shadow:0 0 18px rgba(232,200,105,.5);}
 header .title-block .sub{color:var(--gold-2);letter-spacing:.3em;font-size:12px;opacity:.8;font-style:italic;}
-.back-link{
-  color:var(--gold-2);font-size:13px;letter-spacing:.2em;
-  border:1px solid rgba(232,200,105,.4);padding:6px 16px;border-radius:20px;text-decoration:none;
-}
+.back-link{color:var(--gold-2);font-size:13px;letter-spacing:.2em;border:1px solid rgba(232,200,105,.4);padding:6px 16px;border-radius:20px;text-decoration:none;}
 .back-link:hover{background:rgba(232,200,105,.1);}
-.logout-btn{
-  background:rgba(220,90,90,.15);border:1px solid rgba(220,90,90,.5);
-  color:#f4c0c0;padding:6px 16px;border-radius:20px;cursor:pointer;font-size:13px;letter-spacing:.15em;
-  font-family:inherit;
-}
+.logout-btn{background:rgba(220,90,90,.15);border:1px solid rgba(220,90,90,.5);color:#f4c0c0;padding:6px 16px;border-radius:20px;cursor:pointer;font-size:13px;letter-spacing:.15em;font-family:inherit;}
 .logout-btn:hover{background:rgba(220,90,90,.28);}
-
-/* ===== 登入畫面 ===== */
-.login-wrap{
-  max-width:420px;margin:8vh auto;
-  background:linear-gradient(180deg, rgba(13,18,56,.92), rgba(7,10,31,.95));
-  border:1px solid rgba(232,200,105,.4);border-radius:12px;
-  padding:36px 32px;text-align:center;
-  box-shadow:0 14px 30px rgba(0,0,0,.6);
-}
-.login-wrap h2{
-  font-family:"Cinzel",serif;letter-spacing:.2em;font-size:22px;margin:0 0 6px;color:var(--gold-1);
-}
+.login-wrap{max-width:420px;margin:8vh auto;background:linear-gradient(180deg, rgba(13,18,56,.92), rgba(7,10,31,.95));border:1px solid rgba(232,200,105,.4);border-radius:12px;padding:36px 32px;text-align:center;box-shadow:0 14px 30px rgba(0,0,0,.6);}
+.login-wrap h2{font-family:"Cinzel",serif;letter-spacing:.2em;font-size:22px;margin:0 0 6px;color:var(--gold-1);}
 .login-wrap .sub{color:var(--gold-2);font-size:13px;letter-spacing:.2em;opacity:.7;margin-bottom:26px;font-style:italic;}
 .login-wrap .field{margin-bottom:14px;text-align:left;}
-.login-wrap label{
-  display:block;font-size:11px;color:var(--gold-2);
-  letter-spacing:.25em;margin-bottom:5px;
-}
-.login-wrap input{
-  width:100%;padding:11px 14px;
-  background:rgba(7,10,31,.7);
-  border:1px solid rgba(232,200,105,.4);
-  border-radius:6px;color:var(--gold-1);font-family:inherit;font-size:14px;
-}
+.login-wrap label{display:block;font-size:11px;color:var(--gold-2);letter-spacing:.25em;margin-bottom:5px;}
+.login-wrap input{width:100%;padding:11px 14px;background:rgba(7,10,31,.7);border:1px solid rgba(232,200,105,.4);border-radius:6px;color:var(--gold-1);font-family:inherit;font-size:14px;}
 .login-wrap input:focus{outline:none;border-color:var(--gold-1);box-shadow:0 0 14px rgba(232,200,105,.35);}
-.login-wrap button{
-  width:100%;margin-top:10px;padding:11px;
-  background:linear-gradient(180deg, var(--gold-2), var(--gold-3));
-  color:#1a0e02;border:1px solid var(--gold-1);border-radius:6px;
-  font-family:inherit;font-weight:700;letter-spacing:.2em;font-size:14px;cursor:pointer;
-}
+.login-wrap button{width:100%;margin-top:10px;padding:11px;background:linear-gradient(180deg, var(--gold-2), var(--gold-3));color:#1a0e02;border:1px solid var(--gold-1);border-radius:6px;font-family:inherit;font-weight:700;letter-spacing:.2em;font-size:14px;cursor:pointer;}
 .login-wrap button:hover{filter:brightness(1.1);}
 .login-wrap button:disabled{opacity:.5;cursor:not-allowed;}
-.login-error{
-  color:#f4a0a0;font-size:12px;margin-top:10px;letter-spacing:.1em;
-  min-height:16px;
-}
-
-/* ===== 主面板 ===== */
+.login-error{color:#f4a0a0;font-size:12px;margin-top:10px;letter-spacing:.1em;min-height:16px;}
 main{max-width:1100px;margin:0 auto;display:none;gap:24px;flex-direction:column;}
-.panel{
-  background:linear-gradient(180deg, rgba(13,18,56,.85), rgba(7,10,31,.92));
-  border:1px solid rgba(232,200,105,.4);
-  border-radius:12px;padding:22px 26px;
-  box-shadow:0 12px 26px rgba(0,0,0,.5);
-}
-.panel h2{
-  font-family:"Cinzel",serif;letter-spacing:.15em;font-size:20px;margin:0 0 6px;color:var(--gold-1);
-}
+.panel{background:linear-gradient(180deg, rgba(13,18,56,.85), rgba(7,10,31,.92));border:1px solid rgba(232,200,105,.4);border-radius:12px;padding:22px 26px;box-shadow:0 12px 26px rgba(0,0,0,.5);}
+.panel h2{font-family:"Cinzel",serif;letter-spacing:.15em;font-size:20px;margin:0 0 6px;color:var(--gold-1);}
 .panel .help{font-size:12px;color:var(--gold-2);opacity:.7;margin:0 0 16px;}
-
-/* 表單 */
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
 .row.single{grid-template-columns:1fr;}
-.row.three{grid-template-columns:1fr 1fr 1fr;}
 .field label{display:block;font-size:12px;color:var(--gold-2);letter-spacing:.2em;margin-bottom:5px;}
-.field input[type="text"],
-.field input[type="datetime-local"],
-.field input[type="date"]{
-  width:100%;padding:9px 12px;
-  background:rgba(7,10,31,.7);border:1px solid rgba(232,200,105,.4);
-  border-radius:5px;color:var(--gold-1);font-family:inherit;font-size:14px;
-}
+.field input[type="text"],.field input[type="datetime-local"],.field input[type="date"]{width:100%;padding:9px 12px;background:rgba(7,10,31,.7);border:1px solid rgba(232,200,105,.4);border-radius:5px;color:var(--gold-1);font-family:inherit;font-size:14px;}
 .field input[type="file"]{font-size:12px;color:var(--gold-2);}
-
-.btn{
-  background:linear-gradient(180deg, rgba(232,200,105,.2), rgba(232,200,105,.06));
-  border:1px solid rgba(232,200,105,.5);color:var(--gold-1);
-  padding:8px 18px;border-radius:5px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.1em;
-}
+.btn{background:linear-gradient(180deg, rgba(232,200,105,.2), rgba(232,200,105,.06));border:1px solid rgba(232,200,105,.5);color:var(--gold-1);padding:8px 18px;border-radius:5px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.1em;}
 .btn:hover{background:rgba(232,200,105,.25);}
-.btn.primary{
-  background:linear-gradient(180deg, var(--gold-2), var(--gold-3));
-  color:#1a0e02;border-color:var(--gold-1);font-weight:700;
-}
+.btn.primary{background:linear-gradient(180deg, var(--gold-2), var(--gold-3));color:#1a0e02;border-color:var(--gold-1);font-weight:700;}
 .btn.primary:hover{filter:brightness(1.1);}
 .btn.danger{border-color:rgba(220,120,120,.6);color:#f4c0c0;background:rgba(220,120,120,.1);}
 .btn.danger:hover{background:rgba(220,120,120,.22);}
 .btn.small{padding:5px 10px;font-size:12px;}
-
-/* 寶藏清單 */
 .tlist{display:flex;flex-direction:column;gap:10px;}
-.tlist .item{
-  display:grid;grid-template-columns:80px 1fr 50px;gap:10px;align-items:center;
-  background:rgba(232,200,105,.06);
-  border:1px solid rgba(232,200,105,.3);border-radius:8px;padding:8px 12px;
-}
-.tlist .item input{
-  padding:7px 10px;background:rgba(7,10,31,.7);border:1px solid rgba(232,200,105,.4);
-  border-radius:5px;color:var(--gold-1);font-family:inherit;font-size:14px;
-}
+.tlist .item{display:grid;grid-template-columns:80px 1fr 50px;gap:10px;align-items:center;background:rgba(232,200,105,.06);border:1px solid rgba(232,200,105,.3);border-radius:8px;padding:8px 12px;}
+.tlist .item input{padding:7px 10px;background:rgba(7,10,31,.7);border:1px solid rgba(232,200,105,.4);border-radius:5px;color:var(--gold-1);font-family:inherit;font-size:14px;}
 .tlist .item .icon-input{text-align:center;font-size:18px;}
 .tlist-add{margin-top:12px;}
-
-/* 線索 */
 .clue-list{display:flex;flex-direction:column;gap:10px;}
-.clue-list .item{
-  display:grid;grid-template-columns:60px 1fr;gap:10px;align-items:center;
-  background:rgba(232,200,105,.06);border:1px solid rgba(232,200,105,.3);
-  border-radius:8px;padding:8px 12px;
-}
-.clue-list .item .label{
-  font-family:"Cinzel",serif;font-weight:700;color:var(--gold-2);
-  text-align:center;font-size:14px;letter-spacing:.15em;
-}
-.clue-list .item input{
-  padding:7px 10px;background:rgba(7,10,31,.7);border:1px solid rgba(232,200,105,.4);
-  border-radius:5px;color:var(--gold-1);font-family:inherit;font-size:14px;
-}
-
-/* 得獎合照 */
-.preview{
-  width:100%;aspect-ratio:4/3;
-  background:rgba(7,10,31,.6);
-  border:1px dashed rgba(232,200,105,.4);border-radius:6px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--gold-2);overflow:hidden;
-}
+.clue-list .item{display:grid;grid-template-columns:60px 1fr;gap:10px;align-items:center;background:rgba(232,200,105,.06);border:1px solid rgba(232,200,105,.3);border-radius:8px;padding:8px 12px;}
+.clue-list .item .label{font-family:"Cinzel",serif;font-weight:700;color:var(--gold-2);text-align:center;font-size:14px;letter-spacing:.15em;}
+.clue-list .item input{padding:7px 10px;background:rgba(7,10,31,.7);border:1px solid rgba(232,200,105,.4);border-radius:5px;color:var(--gold-1);font-family:inherit;font-size:14px;}
+.preview{width:100%;aspect-ratio:4/3;background:rgba(7,10,31,.6);border:1px dashed rgba(232,200,105,.4);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--gold-2);overflow:hidden;}
 .preview img{width:100%;height:100%;object-fit:cover;}
 .gallery-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:14px;}
-.gallery-list .card{
-  background:rgba(232,200,105,.06);
-  border:1px solid rgba(232,200,105,.3);
-  border-radius:8px;overflow:hidden;display:flex;flex-direction:column;
-}
+.gallery-list .card{background:rgba(232,200,105,.06);border:1px solid rgba(232,200,105,.3);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;}
 .gallery-list .pi{aspect-ratio:4/3;background:rgba(7,10,31,.6);}
 .gallery-list .pi img{width:100%;height:100%;object-fit:cover;}
 .gallery-list .info{padding:8px 12px;}
 .gallery-list .info .w{font-weight:700;color:var(--gold-1);font-size:14px;}
 .gallery-list .info .p{font-size:12px;color:var(--gold-2);opacity:.85;}
-.gallery-list .card button{
-  margin:0 12px 12px;padding:6px 10px;background:rgba(220,120,120,.1);
-  border:1px solid rgba(220,120,120,.5);color:#f4c0c0;border-radius:5px;
-  cursor:pointer;font-family:inherit;font-size:12px;
-}
-
-/* 儲存列 */
-.save-bar{
-  position:sticky;bottom:20px;z-index:50;
-  background:linear-gradient(180deg, rgba(13,18,56,.95), rgba(7,10,31,.98));
-  border:1px solid rgba(232,200,105,.5);
-  border-radius:12px;padding:14px 22px;
-  display:flex;align-items:center;justify-content:space-between;gap:14px;
-  box-shadow:0 8px 22px rgba(0,0,0,.65);
-  margin-top:8px;
-}
+.gallery-list .card button{margin:0 12px 12px;padding:6px 10px;background:rgba(220,120,120,.1);border:1px solid rgba(220,120,120,.5);color:#f4c0c0;border-radius:5px;cursor:pointer;font-family:inherit;font-size:12px;}
+.save-bar{position:sticky;bottom:20px;z-index:50;background:linear-gradient(180deg, rgba(13,18,56,.95), rgba(7,10,31,.98));border:1px solid rgba(232,200,105,.5);border-radius:12px;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 8px 22px rgba(0,0,0,.65);margin-top:8px;}
 .save-bar .status{color:var(--gold-2);font-size:13px;letter-spacing:.1em;}
 .save-bar .status.dirty{color:#f4d090;}
 .save-bar .status.saving{color:#caa86a;}
 .save-bar .status.saved{color:#a0d0a0;}
 .save-bar .status.error{color:#f4a0a0;}
-
-/* Toast */
-.toast{
-  position:fixed;left:50%;bottom:30px;transform:translateX(-50%);
-  background:rgba(7,10,31,.95);color:var(--gold-1);
-  border:1px solid rgba(232,200,105,.5);
-  padding:10px 22px;border-radius:24px;font-size:13px;letter-spacing:.1em;
-  opacity:0;transition:opacity .3s ease;pointer-events:none;
-  box-shadow:0 0 18px rgba(232,200,105,.4);z-index:99;
-}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:rgba(7,10,31,.95);color:var(--gold-1);border:1px solid rgba(232,200,105,.5);padding:10px 22px;border-radius:24px;font-size:13px;letter-spacing:.1em;opacity:0;transition:opacity .3s ease;pointer-events:none;box-shadow:0 0 18px rgba(232,200,105,.4);z-index:99;}
 .toast.show{opacity:1;}
-
-/* Loading mask */
-.loading{
-  position:fixed;inset:0;background:rgba(5,8,24,.85);
-  display:flex;align-items:center;justify-content:center;
-  z-index:1000;color:var(--gold-1);letter-spacing:.2em;font-size:14px;
-}
+.loading{position:fixed;inset:0;background:rgba(5,8,24,.85);display:flex;align-items:center;justify-content:center;z-index:1000;color:var(--gold-1);letter-spacing:.2em;font-size:14px;}
 .loading.hidden{display:none;}
-
-@media(max-width:760px){
-  .row,.row.three{grid-template-columns:1fr;}
-  .tlist .item{grid-template-columns:60px 1fr 40px;}
-}
+@media(max-width:760px){.row{grid-template-columns:1fr;}.tlist .item{grid-template-columns:60px 1fr 40px;}}
 </style>
 </head>
-
 <body>
 
 <div class="loading" id="loading">⸻ 連線中 ⸻</div>
 
-<!-- 登入畫面 -->
 <div class="login-wrap" id="loginPanel" style="display:none;">
   <h2>後 ・ 台 ・ 登 ・ 入</h2>
   <div class="sub">ADMIN ・ LOGIN</div>
@@ -239,7 +106,6 @@ main{max-width:1100px;margin:0 auto;display:none;gap:24px;flex-direction:column;
   <div class="login-error" id="loginError"></div>
 </div>
 
-<!-- 主控制台 -->
 <header style="display:none;" id="adminHeader">
   <div class="title-block">
     <h1>勝海藏寶季 ・ 後台管理</h1>
@@ -253,94 +119,63 @@ main{max-width:1100px;margin:0 auto;display:none;gap:24px;flex-direction:column;
 
 <main id="adminMain">
 
-  <!-- ============ 活動資訊 ============ -->
   <section class="panel">
     <h2>① 活動資訊</h2>
     <p class="help">活動主標題、副標題、起訖時間。</p>
     <div class="row">
-      <div class="field">
-        <label>活動標題</label>
-        <input type="text" id="eventTitle" placeholder="例：勝海藏寶季"/>
-      </div>
-      <div class="field">
-        <label>副標</label>
-        <input type="text" id="eventSubtitle" placeholder="例：探索辦公室中的神秘寶藏"/>
-      </div>
+      <div class="field"><label>活動標題</label><input type="text" id="eventTitle" placeholder="例：勝海藏寶季"/></div>
+      <div class="field"><label>副標</label><input type="text" id="eventSubtitle" placeholder="例：探索辦公室中的神秘寶藏"/></div>
     </div>
     <div class="row">
-      <div class="field">
-        <label>開始時間</label>
-        <input type="text" id="periodStart" placeholder="2026/07/15　09:00"/>
-      </div>
-      <div class="field">
-        <label>結束時間</label>
-        <input type="text" id="periodEnd" placeholder="2026/07/31　18:00"/>
-      </div>
+      <div class="field"><label>開始時間</label><input type="text" id="periodStart" placeholder="2026/07/15　09:00"/></div>
+      <div class="field"><label>結束時間</label><input type="text" id="periodEnd" placeholder="2026/07/31　18:00"/></div>
     </div>
   </section>
 
-  <!-- ============ 寶藏清單 ============ -->
   <section class="panel">
     <h2>② 本期寶藏清單</h2>
     <p class="help">這邊改了，前台「本期藏寶內容」卷軸會跟著變。icon 可以填 emoji 或留空。</p>
     <div class="tlist" id="treasuresList"></div>
-    <div class="tlist-add">
-      <button class="btn" id="addTreasureBtn">＋ 新增寶藏</button>
-    </div>
+    <div class="tlist-add"><button class="btn" id="addTreasureBtn">＋ 新增寶藏</button></div>
   </section>
 
-  <!-- ============ 線索 ============ -->
   <section class="panel">
-    <h2>③ 藏寶圖線索（3 條）</h2>
-    <p class="help">前台「藏寶圖」上 3 張紙條的內文。</p>
+    <h2>③ 藏寶圖線索（6 條）</h2>
+    <p class="help">前台「藏寶圖」上 6 張紙條的內文。</p>
     <div class="clue-list" id="cluesList">
       <div class="item"><div class="label">①</div><input type="text" data-clue="0" placeholder="線索一"/></div>
       <div class="item"><div class="label">②</div><input type="text" data-clue="1" placeholder="線索二"/></div>
       <div class="item"><div class="label">③</div><input type="text" data-clue="2" placeholder="線索三"/></div>
+      <div class="item"><div class="label">④</div><input type="text" data-clue="3" placeholder="線索四"/></div>
+      <div class="item"><div class="label">⑤</div><input type="text" data-clue="4" placeholder="線索五"/></div>
+      <div class="item"><div class="label">⑥</div><input type="text" data-clue="5" placeholder="線索六"/></div>
     </div>
   </section>
 
-  <!-- ============ 得獎合照 ============ -->
   <section class="panel">
     <h2>④ 新增得獎合照</h2>
     <p class="help">填入得獎人姓名、獎品、日期並上傳照片，會即時出現在前台「得獎名單」畫面。</p>
     <div class="row">
-      <div class="field">
-        <label>得獎人姓名</label>
-        <input type="text" id="winnerName" placeholder="例：Mina"/>
-      </div>
-      <div class="field">
-        <label>獎品</label>
-        <input type="text" id="winnerPrize" placeholder="例：機械式鍵盤"/>
-      </div>
+      <div class="field"><label>得獎人姓名</label><input type="text" id="winnerName" placeholder="例：Mina"/></div>
+      <div class="field"><label>獎品</label><input type="text" id="winnerPrize" placeholder="例：機械式鍵盤"/></div>
     </div>
     <div class="row">
-      <div class="field">
-        <label>得獎日期</label>
-        <input type="date" id="winnerDate"/>
-      </div>
-      <div class="field">
-        <label>合照</label>
-        <input type="file" id="winnerFile" accept="image/*"/>
-      </div>
+      <div class="field"><label>得獎日期</label><input type="date" id="winnerDate"/></div>
+      <div class="field"><label>合照</label><input type="file" id="winnerFile" accept="image/*"/></div>
     </div>
-    <div class="row single">
-      <div class="preview" id="winnerPreview">尚未選擇圖片</div>
-    </div>
+    <div class="row single"><div class="preview" id="winnerPreview">尚未選擇圖片</div></div>
     <div style="display:flex;gap:10px;justify-content:flex-end;">
       <button class="btn" id="winnerReset">清除</button>
       <button class="btn primary" id="winnerAdd">＋ 加入英雄榜</button>
     </div>
   </section>
 
-  <!-- ============ 已上傳合照 ============ -->
   <section class="panel">
     <h2>⑤ 已上傳的得獎合照</h2>
     <p class="help">前台會依此順序顯示，最多 5 張。</p>
     <div class="gallery-list" id="galleryList"></div>
   </section>
 
-  <!-- 儲存列 -->
   <div class="save-bar">
     <div class="status" id="saveStatus">資料已同步</div>
     <button class="btn primary" id="saveBtn">💾 儲存所有變更</button>
@@ -350,12 +185,11 @@ main{max-width:1100px;margin:0 auto;display:none;gap:24px;flex-direction:column;
 
 <div class="toast" id="toast"></div>
 
-<!-- ============ Firebase ============ -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut }
   from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, onSnapshot }
+import { getFirestore, doc, getDoc, setDoc }
   from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -387,310 +221,226 @@ const DEFAULT_DATA = {
   clues: [
     "魔法的光芒指引方向",
     "細心觀察四周即可發現",
-    "寶藏就在不起眼的角落"
+    "寶藏就在不起眼的角落",
+    "往有光的地方前進",
+    "記得抬頭看",
+    "第六感往往是對的"
   ],
   winners: []
 };
 
 let currentData = JSON.parse(JSON.stringify(DEFAULT_DATA));
 let isDirty = false;
-
 const $ = id => document.getElementById(id);
 
-/* ---------- Toast / status ---------- */
 function toast(msg){
-  const t = $('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._t);
-  t._t = setTimeout(() => t.classList.remove('show'), 2200);
+  const t=$('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),2200);
 }
-function setStatus(text, cls){
-  const s = $('saveStatus');
-  s.textContent = text;
-  s.className = 'status ' + (cls||'');
+function setStatus(text,cls){
+  const s=$('saveStatus'); s.textContent=text; s.className='status '+(cls||'');
 }
-function markDirty(){
-  isDirty = true;
-  setStatus('有變更尚未儲存', 'dirty');
-}
+function markDirty(){ isDirty=true; setStatus('有變更尚未儲存','dirty'); }
 
-/* ---------- 登入 ---------- */
 $('loginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const pw = $('loginPassword').value;
-  if (!pw) return;
-  $('loginBtn').disabled = true;
-  $('loginError').textContent = '';
-  try {
-    await signInWithEmailAndPassword(auth, ADMIN_EMAIL, pw);
-  } catch(err) {
-    $('loginError').textContent = '密碼錯誤，請重新輸入。';
-    $('loginBtn').disabled = false;
-  }
+  const pw=$('loginPassword').value;
+  if(!pw) return;
+  $('loginBtn').disabled=true;
+  $('loginError').textContent='';
+  try { await signInWithEmailAndPassword(auth, ADMIN_EMAIL, pw); }
+  catch(err){ $('loginError').textContent='密碼錯誤，請重新輸入。'; $('loginBtn').disabled=false; }
 });
 
 $('logoutBtn').addEventListener('click', async () => {
-  if (isDirty && !confirm('還有變更沒儲存，確定要登出嗎？')) return;
-  await signOut(auth);
-  location.reload();
+  if(isDirty && !confirm('還有變更沒儲存，確定要登出嗎？')) return;
+  await signOut(auth); location.reload();
 });
 
-/* ---------- 認證狀態 ---------- */
 onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    // 已登入
-    $('loginPanel').style.display = 'none';
-    $('adminHeader').style.display = 'flex';
-    $('adminMain').style.display = 'flex';
+  if(user){
+    $('loginPanel').style.display='none';
+    $('adminHeader').style.display='flex';
+    $('adminMain').style.display='flex';
     await loadData();
     $('loading').classList.add('hidden');
   } else {
-    // 未登入
-    $('adminHeader').style.display = 'none';
-    $('adminMain').style.display = 'none';
-    $('loginPanel').style.display = 'block';
+    $('adminHeader').style.display='none';
+    $('adminMain').style.display='none';
+    $('loginPanel').style.display='block';
     $('loading').classList.add('hidden');
   }
 });
 
-/* ---------- 載入資料 ---------- */
 async function loadData(){
   try {
     const snap = await getDoc(DOC_REF);
-    if (snap.exists()) {
+    if(snap.exists()){
       const data = snap.data();
       currentData = Object.assign({}, DEFAULT_DATA, data);
-      // 合併深層欄位
       currentData.period = Object.assign({}, DEFAULT_DATA.period, data.period||{});
       currentData.treasures = Array.isArray(data.treasures) ? data.treasures : DEFAULT_DATA.treasures;
       currentData.clues = Array.isArray(data.clues) ? data.clues : DEFAULT_DATA.clues;
+      // 確保至少 6 個線索欄位
+      while(currentData.clues.length < 6) currentData.clues.push('');
       currentData.winners = Array.isArray(data.winners) ? data.winners : [];
     } else {
       currentData = JSON.parse(JSON.stringify(DEFAULT_DATA));
     }
-    renderAll();
-    isDirty = false;
-    setStatus('資料已同步', 'saved');
-  } catch(err) {
-    console.error(err);
-    setStatus('讀取失敗：' + err.message, 'error');
-  }
+    renderAll(); isDirty=false; setStatus('資料已同步','saved');
+  } catch(err){ console.error(err); setStatus('讀取失敗：'+err.message,'error'); }
 }
 
-/* ---------- 儲存 ---------- */
 $('saveBtn').addEventListener('click', save);
 async function save(){
-  collectFromForm();
-  setStatus('儲存中…', 'saving');
+  collectFromForm(); setStatus('儲存中…','saving');
   try {
     await setDoc(DOC_REF, currentData);
-    isDirty = false;
-    setStatus('資料已同步', 'saved');
-    toast('已儲存到雲端');
-  } catch(err) {
-    setStatus('儲存失敗：' + err.message, 'error');
-    toast('儲存失敗：' + err.message);
-  }
+    isDirty=false; setStatus('資料已同步','saved'); toast('已儲存到雲端');
+  } catch(err){ setStatus('儲存失敗：'+err.message,'error'); toast('儲存失敗：'+err.message); }
 }
 
-/* ---------- 表單渲染 / 收集 ---------- */
 function renderAll(){
-  $('eventTitle').value = currentData.eventTitle || '';
-  $('eventSubtitle').value = currentData.eventSubtitle || '';
-  $('periodStart').value = currentData.period?.start || '';
-  $('periodEnd').value = currentData.period?.end || '';
-  renderTreasures();
-  renderClues();
-  renderGallery();
+  $('eventTitle').value = currentData.eventTitle||'';
+  $('eventSubtitle').value = currentData.eventSubtitle||'';
+  $('periodStart').value = currentData.period?.start||'';
+  $('periodEnd').value = currentData.period?.end||'';
+  renderTreasures(); renderClues(); renderGallery();
 }
 
 function renderTreasures(){
-  const wrap = $('treasuresList');
-  wrap.innerHTML = '';
-  currentData.treasures.forEach((t, i) => {
-    const item = document.createElement('div');
-    item.className = 'item';
-    item.innerHTML = `
+  const wrap=$('treasuresList'); wrap.innerHTML='';
+  currentData.treasures.forEach((t,i)=>{
+    const item=document.createElement('div'); item.className='item';
+    item.innerHTML=`
       <input type="text" class="icon-input" value="${esc(t.icon||'')}" placeholder="🎁" maxlength="3"/>
       <input type="text" value="${esc(t.name||'')}" placeholder="例：NT$ 1,000 × 1"/>
-      <button class="btn danger small" data-del="${i}">✕</button>
-    `;
+      <button class="btn danger small" data-del="${i}">✕</button>`;
     wrap.appendChild(item);
   });
-  wrap.querySelectorAll('input').forEach(inp => inp.addEventListener('input', markDirty));
-  wrap.querySelectorAll('button[data-del]').forEach(b => b.addEventListener('click', () => {
-    if (!confirm('確定要刪除這個寶藏？')) return;
-    const i = +b.dataset.del;
-    collectFromForm();
-    currentData.treasures.splice(i, 1);
-    renderTreasures();
-    markDirty();
+  wrap.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',markDirty));
+  wrap.querySelectorAll('button[data-del]').forEach(b=>b.addEventListener('click',()=>{
+    if(!confirm('確定要刪除這個寶藏？')) return;
+    collectFromForm(); currentData.treasures.splice(+b.dataset.del,1); renderTreasures(); markDirty();
   }));
 }
-$('addTreasureBtn').addEventListener('click', () => {
-  collectFromForm();
-  currentData.treasures.push({ name: '', icon: '🎁' });
-  renderTreasures();
-  markDirty();
+$('addTreasureBtn').addEventListener('click',()=>{
+  collectFromForm(); currentData.treasures.push({name:'',icon:'🎁'}); renderTreasures(); markDirty();
 });
 
 function renderClues(){
-  const inputs = document.querySelectorAll('#cluesList input[data-clue]');
-  inputs.forEach(inp => {
-    const i = +inp.dataset.clue;
-    inp.value = currentData.clues[i] || '';
-    inp.addEventListener('input', markDirty);
+  document.querySelectorAll('#cluesList input[data-clue]').forEach(inp=>{
+    inp.value = currentData.clues[+inp.dataset.clue]||'';
+    inp.addEventListener('input',markDirty);
   });
 }
 
-/* ---------- 收集表單 ---------- */
 function collectFromForm(){
-  currentData.eventTitle = $('eventTitle').value.trim();
-  currentData.eventSubtitle = $('eventSubtitle').value.trim();
-  currentData.period.start = $('periodStart').value.trim();
-  currentData.period.end = $('periodEnd').value.trim();
-  // 寶藏
-  const items = document.querySelectorAll('#treasuresList .item');
-  currentData.treasures = Array.from(items).map(it => {
-    const inputs = it.querySelectorAll('input');
-    return { icon: inputs[0].value.trim(), name: inputs[1].value.trim() };
-  }).filter(t => t.name);
-  // 線索
-  const clues = [0,1,2].map(i => {
-    const el = document.querySelector(`#cluesList input[data-clue="${i}"]`);
+  currentData.eventTitle=$('eventTitle').value.trim();
+  currentData.eventSubtitle=$('eventSubtitle').value.trim();
+  currentData.period.start=$('periodStart').value.trim();
+  currentData.period.end=$('periodEnd').value.trim();
+  const items=document.querySelectorAll('#treasuresList .item');
+  currentData.treasures=Array.from(items).map(it=>{
+    const inp=it.querySelectorAll('input');
+    return {icon:inp[0].value.trim(), name:inp[1].value.trim()};
+  }).filter(t=>t.name);
+  // 6 條線索
+  currentData.clues=[0,1,2,3,4,5].map(i=>{
+    const el=document.querySelector(`#cluesList input[data-clue="${i}"]`);
     return el ? el.value.trim() : '';
   });
-  currentData.clues = clues;
 }
 
-/* ---------- 得獎合照 ---------- */
-let winnerImg = null;
-$('winnerFile').addEventListener('change', async (e) => {
-  const f = e.target.files[0];
-  if (!f) { winnerImg = null; $('winnerPreview').textContent = '尚未選擇圖片'; return; }
-  try {
-    winnerImg = await fileToDataURL(f, 1200, 0.78);
-    $('winnerPreview').innerHTML = `<img src="${winnerImg}"/>`;
-  } catch(err){
-    toast('讀取圖片失敗');
-  }
+let winnerImg=null;
+$('winnerFile').addEventListener('change', async (e)=>{
+  const f=e.target.files[0];
+  if(!f){ winnerImg=null; $('winnerPreview').textContent='尚未選擇圖片'; return; }
+  try { winnerImg=await fileToDataURL(f,1200,0.78); $('winnerPreview').innerHTML=`<img src="${winnerImg}"/>`; }
+  catch(err){ toast('讀取圖片失敗'); }
 });
-$('winnerReset').addEventListener('click', () => {
-  $('winnerName').value = '';
-  $('winnerPrize').value = '';
-  $('winnerDate').value = '';
-  $('winnerFile').value = '';
-  $('winnerPreview').textContent = '尚未選擇圖片';
-  winnerImg = null;
+$('winnerReset').addEventListener('click',()=>{
+  $('winnerName').value=''; $('winnerPrize').value='';
+  $('winnerDate').value=''; $('winnerFile').value='';
+  $('winnerPreview').textContent='尚未選擇圖片'; winnerImg=null;
 });
-$('winnerAdd').addEventListener('click', async () => {
-  const name = $('winnerName').value.trim();
-  const prize = $('winnerPrize').value.trim();
-  const date = $('winnerDate').value.trim();
-  if (!name && !prize) { toast('請至少填寫姓名或獎品'); return; }
+$('winnerAdd').addEventListener('click', async ()=>{
+  const name=$('winnerName').value.trim();
+  const prize=$('winnerPrize').value.trim();
+  const date=$('winnerDate').value.trim();
+  if(!name&&!prize){ toast('請至少填寫姓名或獎品'); return; }
   collectFromForm();
-  currentData.winners = currentData.winners || [];
-  currentData.winners.unshift({
-    id: Date.now(),
-    winner: name, prize, date, img: winnerImg
-  });
-  // 立即儲存（因為含圖片，使用者通常會期待立刻同步）
-  setStatus('上傳中…', 'saving');
+  currentData.winners=currentData.winners||[];
+  currentData.winners.unshift({id:Date.now(), winner:name, prize, date, img:winnerImg});
+  setStatus('上傳中…','saving');
   try {
     await setDoc(DOC_REF, currentData);
-    setStatus('資料已同步', 'saved');
-    toast('已加入英雄榜並上傳');
-    $('winnerReset').click();
-    renderGallery();
-    isDirty = false;
-  } catch(err) {
-    setStatus('上傳失敗：' + err.message, 'error');
-    toast('上傳失敗（可能是檔案太大）');
-  }
+    setStatus('資料已同步','saved'); toast('已加入英雄榜並上傳');
+    $('winnerReset').click(); renderGallery(); isDirty=false;
+  } catch(err){ setStatus('上傳失敗：'+err.message,'error'); toast('上傳失敗（可能是檔案太大）'); }
 });
 
 function renderGallery(){
-  const grid = $('galleryList');
-  grid.innerHTML = '';
-  const winners = currentData.winners || [];
-  if (!winners.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--gold-2);opacity:.6;letter-spacing:.2em;">尚無資料</div>';
+  const grid=$('galleryList'); grid.innerHTML='';
+  const winners=currentData.winners||[];
+  if(!winners.length){
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--gold-2);opacity:.6;letter-spacing:.2em;">尚無資料</div>';
     return;
   }
-  winners.forEach(w => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
+  winners.forEach(w=>{
+    const card=document.createElement('div'); card.className='card';
+    card.innerHTML=`
       <div class="pi">${w.img?`<img src="${w.img}"/>`:''}</div>
       <div class="info">
         <div class="w">${esc(w.winner||'佚名')}</div>
         <div class="p">${esc(w.prize||'')}${w.date?` ・ ${esc(w.date)}`:''}</div>
       </div>
-      <button data-del="${w.id}">刪除</button>
-    `;
+      <button data-del="${w.id}">刪除</button>`;
     grid.appendChild(card);
   });
-  grid.querySelectorAll('button[data-del]').forEach(b => {
-    b.addEventListener('click', async () => {
-      if (!confirm('確定刪除這筆合照？')) return;
-      const id = Number(b.dataset.del);
-      currentData.winners = currentData.winners.filter(w => w.id !== id);
-      setStatus('儲存中…', 'saving');
-      try {
-        await setDoc(DOC_REF, currentData);
-        renderGallery();
-        setStatus('資料已同步', 'saved');
-        toast('已刪除');
-      } catch(err) {
-        toast('刪除失敗：' + err.message);
-      }
+  grid.querySelectorAll('button[data-del]').forEach(b=>{
+    b.addEventListener('click', async ()=>{
+      if(!confirm('確定刪除這筆合照？')) return;
+      currentData.winners=currentData.winners.filter(w=>w.id!==Number(b.dataset.del));
+      setStatus('儲存中…','saving');
+      try { await setDoc(DOC_REF,currentData); renderGallery(); setStatus('資料已同步','saved'); toast('已刪除'); }
+      catch(err){ toast('刪除失敗：'+err.message); }
     });
   });
 }
 
-/* ---------- 圖片壓縮 ---------- */
-function fileToDataURL(file, maxSide=1200, quality=0.8){
-  return new Promise((resolve, reject) => {
-    if (!file) return resolve(null);
-    const r = new FileReader();
-    r.onload = e => {
-      const img = new Image();
-      img.onload = () => {
-        let {width, height} = img;
-        if (width > maxSide || height > maxSide) {
-          const ratio = Math.min(maxSide/width, maxSide/height);
-          width = Math.round(width*ratio);
-          height = Math.round(height*ratio);
+function fileToDataURL(file,maxSide=1200,quality=0.8){
+  return new Promise((resolve,reject)=>{
+    if(!file) return resolve(null);
+    const r=new FileReader();
+    r.onload=e=>{
+      const img=new Image();
+      img.onload=()=>{
+        let {width,height}=img;
+        if(width>maxSide||height>maxSide){
+          const ratio=Math.min(maxSide/width,maxSide/height);
+          width=Math.round(width*ratio); height=Math.round(height*ratio);
         }
-        const canvas = document.createElement('canvas');
-        canvas.width = width; canvas.height = height;
-        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-        resolve(canvas.toDataURL('image/jpeg', quality));
+        const canvas=document.createElement('canvas');
+        canvas.width=width; canvas.height=height;
+        canvas.getContext('2d').drawImage(img,0,0,width,height);
+        resolve(canvas.toDataURL('image/jpeg',quality));
       };
-      img.onerror = reject;
-      img.src = e.target.result;
+      img.onerror=reject; img.src=e.target.result;
     };
-    r.onerror = reject;
-    r.readAsDataURL(file);
+    r.onerror=reject; r.readAsDataURL(file);
   });
 }
 
 function esc(s){
-  return String(s).replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+  return String(s).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
 }
 
-/* ---------- 表單監聽 ---------- */
-['eventTitle','eventSubtitle','periodStart','periodEnd'].forEach(id => {
-  $(id).addEventListener('input', markDirty);
+['eventTitle','eventSubtitle','periodStart','periodEnd'].forEach(id=>{
+  $(id).addEventListener('input',markDirty);
 });
-
-/* 離開警告 */
-window.addEventListener('beforeunload', (e) => {
-  if (isDirty) {
-    e.preventDefault();
-    e.returnValue = '';
-  }
+window.addEventListener('beforeunload',(e)=>{
+  if(isDirty){ e.preventDefault(); e.returnValue=''; }
 });
 </script>
 </body>
