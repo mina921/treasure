@@ -106,15 +106,17 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
 @keyframes scrollDrop{0%{transform:translateY(-120vh) rotate(-6deg);opacity:0;}60%{opacity:1;}75%{transform:translateY(15px) rotate(2deg);}100%{transform:translateY(0) rotate(0);opacity:1;}}
 .scroll-img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 22px 40px rgba(0,0,0,.7));}
 .scroll-content{position:absolute;inset:28% 20% 24% 20%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;color:var(--ink);text-align:center;}
-.scroll-title{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(16px,1.7vw,22px);text-align:center;margin:0 0 26px;letter-spacing:.12em;color:#3a1e08;white-space:nowrap;}
-.scroll-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:stretch;gap:18px;width:100%;max-width:300px;}
-.scroll-list li{font-family:"Noto Serif TC",serif;font-size:clamp(13px,1.4vw,17px);font-weight:500;color:#2a1408;display:flex;align-items:center;justify-content:center;gap:12px;padding:6px 10px;border-bottom:1px dashed rgba(60,38,16,.4);line-height:1.5;white-space:nowrap;}
+.scroll-title{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(14px,1.5vw,20px);text-align:center;margin:0 0 14px;letter-spacing:.12em;color:#3a1e08;white-space:nowrap;}
+.scroll-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:stretch;gap:10px;width:100%;max-width:300px;}
+.scroll-list li{font-family:"Noto Serif TC",serif;font-size:clamp(12px,1.2vw,15px);font-weight:500;color:#2a1408;display:flex;align-items:center;justify-content:center;gap:10px;padding:4px 8px;border-bottom:1px dashed rgba(60,38,16,.4);line-height:1.4;white-space:nowrap;}
 .scroll-list li:last-child{border-bottom:none;}
-.scroll-list li .icon{font-size:1.25em;flex-shrink:0;}
+.scroll-list li .icon{font-size:1.2em;flex-shrink:0;}
 .scroll-list li.found{opacity:.85;}
-.scroll-list li .found-stamp{height:2em;vertical-align:middle;margin-left:8px;transform:rotate(-8deg);flex-shrink:0;filter:drop-shadow(0 1px 3px rgba(0,0,0,.25));}
-.clue-paper.found-clue .clue-found-badge{display:flex;align-items:center;justify-content:center;margin-top:4px;}
-.clue-paper.found-clue .clue-found-badge img{width:85%;max-width:130px;transform:rotate(-10deg);filter:drop-shadow(0 1px 4px rgba(0,0,0,.2));}
+.scroll-list li .found-stamp{height:1.6em;vertical-align:middle;margin-left:6px;transform:rotate(-8deg);flex-shrink:0;filter:drop-shadow(0 1px 3px rgba(0,0,0,.25));}
+/* 紙條找到：文字淡化留在原位，印章疊在上面 */
+.clue-paper.found-clue .clue-num,.clue-paper.found-clue .clue-text{opacity:0.3;}
+.clue-paper.found-clue .clue-found-badge{position:absolute;inset:5%;display:flex;align-items:center;justify-content:center;z-index:5;pointer-events:none;}
+.clue-paper.found-clue .clue-found-badge img{width:90%;transform:rotate(-10deg);filter:drop-shadow(0 1px 4px rgba(0,0,0,.2));}
 #screen-time{flex-direction:column;gap:0;justify-content:center;}
 #screen-time .time-card{margin-top:-180px;position:relative;z-index:2;}
 .hourglass-stage{position:relative;width:min(560px,72vw);aspect-ratio:.72;transform:scale(.25);opacity:0;transition:transform 1.2s cubic-bezier(.34,1.4,.6,1),opacity .9s ease;}
