@@ -327,11 +327,15 @@ function renderTreasures(){
     wrap.appendChild(item);
   });
   wrap.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',markDirty));
-  wrap.querySelectorAll('button[data-found]').forEach(b=>b.addEventListener('click',()=>{
+  wrap.querySelectorAll('button[data-found]').forEach(b=>b.addEventListener('click',async()=>{
     const i=+b.dataset.found;
-    collectFromForm();
+    collectFromForm(); // 此時已包含 found 狀態（從 DOM 讀）
     currentData.treasures[i].found=!currentData.treasures[i].found;
-    renderTreasures(); markDirty();
+    renderTreasures();
+    // 立即儲存到 Firebase，前台即時更新
+    setStatus('儲存中…','saving');
+    try { await setDoc(DOC_REF,currentData); setStatus('資料已同步','saved'); toast(currentData.treasures[i].found?'已標記為找到 ✔':'已取消找到狀態'); }
+    catch(err){ setStatus('儲存失敗','error'); toast('儲存失敗'); }
   }));
   wrap.querySelectorAll('button[data-del]').forEach(b=>b.addEventListener('click',()=>{
     if(!confirm('確定要刪除這個寶藏？')) return;
@@ -355,11 +359,15 @@ function renderClues(){
     btn.classList.toggle('active',!!isFound);
     const item=document.getElementById('clueItem'+i);
     if(item) item.classList.toggle('is-found',!!isFound);
-    btn.onclick=()=>{
+    btn.onclick=async()=>{
       collectFromForm();
       if(!currentData.cluesFound) currentData.cluesFound=[false,false,false,false,false,false];
       currentData.cluesFound[i]=!currentData.cluesFound[i];
-      renderClues(); markDirty();
+      renderClues();
+      // 立即儲存到 Firebase，前台即時更新
+      setStatus('儲存中…','saving');
+      try { await setDoc(DOC_REF,currentData); setStatus('資料已同步','saved'); toast(currentData.cluesFound[i]?'線索已標記為找到 ✔':'已取消找到狀態'); }
+      catch(err){ setStatus('儲存失敗','error'); toast('儲存失敗'); }
     };
   });
 }
@@ -372,7 +380,12 @@ function collectFromForm(){
   const items=document.querySelectorAll('#treasuresList .item');
   currentData.treasures=Array.from(items).map(it=>{
     const inp=it.querySelectorAll('input');
-    return {icon:inp[0].value.trim(), name:inp[1].value.trim()};
+    const foundBtn=it.querySelector('.found-toggle');
+    return {
+      icon:inp[0].value.trim(),
+      name:inp[1].value.trim(),
+      found: foundBtn ? foundBtn.classList.contains('active') : false
+    };
   }).filter(t=>t.name);
   // 6 條線索（文字）
   currentData.clues=[0,1,2,3,4,5].map(i=>{
