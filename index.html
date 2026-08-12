@@ -111,12 +111,10 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
 .scroll-list li{font-family:"Noto Serif TC",serif;font-size:clamp(13px,1.4vw,17px);font-weight:500;color:#2a1408;display:flex;align-items:center;justify-content:center;gap:12px;padding:6px 10px;border-bottom:1px dashed rgba(60,38,16,.4);line-height:1.5;white-space:nowrap;}
 .scroll-list li:last-child{border-bottom:none;}
 .scroll-list li .icon{font-size:1.25em;flex-shrink:0;}
-.scroll-list li.found{opacity:.75;}
-.scroll-list li.found .item-name{text-decoration:line-through;text-decoration-color:#c0392b;text-decoration-thickness:2px;color:#7a4a3a;}
-.scroll-list li .found-tag{font-size:.75em;color:#c0392b;font-weight:700;letter-spacing:.05em;margin-left:4px;flex-shrink:0;}
-.clue-paper.found-clue .clue-content{opacity:.8;}
-.clue-paper.found-clue .clue-text{text-decoration:line-through;text-decoration-color:#8b0000;text-decoration-thickness:3px;color:#8a6a5a;}
-.clue-paper.found-clue .clue-found-badge{font-size:.85em;color:#8b0000;font-weight:900;margin-top:5px;letter-spacing:.05em;text-shadow:0 0 4px rgba(139,0,0,.3);}
+.scroll-list li.found{opacity:.85;}
+.scroll-list li .found-stamp{height:2em;vertical-align:middle;margin-left:8px;transform:rotate(-8deg);flex-shrink:0;filter:drop-shadow(0 1px 3px rgba(0,0,0,.25));}
+.clue-paper.found-clue .clue-found-badge{display:flex;align-items:center;justify-content:center;margin-top:4px;}
+.clue-paper.found-clue .clue-found-badge img{width:85%;max-width:130px;transform:rotate(-10deg);filter:drop-shadow(0 1px 4px rgba(0,0,0,.2));}
 #screen-time{flex-direction:column;gap:0;justify-content:center;}
 #screen-time .time-card{margin-top:-180px;position:relative;z-index:2;}
 .hourglass-stage{position:relative;width:min(560px,72vw);aspect-ratio:.72;transform:scale(.25);opacity:0;transition:transform 1.2s cubic-bezier(.34,1.4,.6,1),opacity .9s ease;}
@@ -345,6 +343,9 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
 <script>
 let C = window.SHH_CONFIG;
 
+/* 已找到印章 */
+const STAMP_URL='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMjAgMTEwIj4KICA8cmVjdCB4PSI0IiB5PSI0IiB3aWR0aD0iMjEyIiBoZWlnaHQ9IjEwMiIgcng9IjEwIiBmaWxsPSJyZ2JhKDE4MCwwLDAsMC4wNSkiIHN0cm9rZT0iI2NjMDAwMCIgc3Ryb2tlLXdpZHRoPSI1Ii8+CiAgPHJlY3QgeD0iMTEiIHk9IjExIiB3aWR0aD0iMTk4IiBoZWlnaHQ9Ijg4IiByeD0iNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjY2MwMDAwIiBzdHJva2Utd2lkdGg9IjIuNSIvPgogIDx0ZXh0IHg9IjExMCIgeT0iNzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJOb3RvIFNlcmlmIFRDLHNlcmlmIiBmb250LXNpemU9IjYyIiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSIjY2MwMDAwIj7lt7Lmib7liLA8L3RleHQ+Cjwvc3ZnPg==';
+
 /* 星空 */
 (function(){
   const sf = document.getElementById('starfield');
@@ -447,7 +448,7 @@ function applyData(data){
   (C.treasures||[]).forEach(t=>{
     const li=document.createElement('li');
     if(t.found) li.classList.add('found');
-    li.innerHTML='<span class="icon">'+(t.icon||'🎁')+'</span><span class="item-name">'+esc(t.name)+'</span>'+(t.found?'<span class="found-tag">✔ 已找到</span>':'');
+    li.innerHTML='<span class="icon">'+(t.icon||'🎁')+'</span><span class="item-name">'+esc(t.name)+'</span>'+(t.found?'<img class="found-stamp" src="'+STAMP_URL+'" alt="已找到"/>':'');
     scrollList.appendChild(li);
   });
 
@@ -461,7 +462,10 @@ function applyData(data){
     if(el) el.textContent=clue;
     const isFound=(C.cluesFound||[])[i];
     if(card){ if(isFound) card.classList.add('found-clue'); else card.classList.remove('found-clue'); }
-    if(badge) badge.style.display=isFound?'block':'none';
+    if(badge){
+      if(isFound){ badge.innerHTML='<img src="'+STAMP_URL+'" alt="已找到"/>'; badge.style.display='flex'; }
+      else{ badge.innerHTML=''; badge.style.display='none'; }
+    }
   });
 
   if(Array.isArray(data.winners)){
