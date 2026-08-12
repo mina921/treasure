@@ -407,7 +407,7 @@ let winnerImg=null;
 $('winnerFile').addEventListener('change', async (e)=>{
   const f=e.target.files[0];
   if(!f){ winnerImg=null; $('winnerPreview').textContent='尚未選擇圖片'; return; }
-  try { winnerImg=await fileToDataURL(f,1200,0.78); $('winnerPreview').innerHTML=`<img src="${winnerImg}"/>`; }
+  try { winnerImg=await fileToDataURL(f,480,0.62); $('winnerPreview').innerHTML=`<img src="${winnerImg}"/>`; }
   catch(err){ toast('讀取圖片失敗'); }
 });
 $('winnerReset').addEventListener('click',()=>{
