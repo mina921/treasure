@@ -329,12 +329,17 @@ function renderTreasures(){
   wrap.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',markDirty));
   wrap.querySelectorAll('button[data-found]').forEach(b=>b.addEventListener('click',async()=>{
     const i=+b.dataset.found;
-    collectFromForm(); // 此時已包含 found 狀態（從 DOM 讀）
+    if(!currentData.treasures[i]) return;
+    // 直接 toggle，不重建陣列
     currentData.treasures[i].found=!currentData.treasures[i].found;
-    renderTreasures();
+    const isFound=currentData.treasures[i].found;
+    // 只更新這顆按鈕的樣式，不重繪整個列表
+    b.textContent=isFound?'✔ 已找到':'未找到';
+    b.classList.toggle('active',isFound);
+    b.closest('.item').classList.toggle('is-found',isFound);
     // 立即儲存到 Firebase，前台即時更新
     setStatus('儲存中…','saving');
-    try { await setDoc(DOC_REF,currentData); setStatus('資料已同步','saved'); toast(currentData.treasures[i].found?'已標記為找到 ✔':'已取消找到狀態'); }
+    try { await setDoc(DOC_REF,currentData); setStatus('資料已同步','saved'); toast(isFound?'已標記為找到 ✔':'已取消找到狀態'); }
     catch(err){ setStatus('儲存失敗','error'); toast('儲存失敗'); }
   }));
   wrap.querySelectorAll('button[data-del]').forEach(b=>b.addEventListener('click',()=>{
@@ -360,13 +365,16 @@ function renderClues(){
     const item=document.getElementById('clueItem'+i);
     if(item) item.classList.toggle('is-found',!!isFound);
     btn.onclick=async()=>{
-      collectFromForm();
       if(!currentData.cluesFound) currentData.cluesFound=[false,false,false,false,false,false];
       currentData.cluesFound[i]=!currentData.cluesFound[i];
-      renderClues();
+      const isFound=currentData.cluesFound[i];
+      btn.textContent=isFound?'✔ 已找到':'未找到';
+      btn.classList.toggle('active',isFound);
+      const item=document.getElementById('clueItem'+i);
+      if(item) item.classList.toggle('is-found',isFound);
       // 立即儲存到 Firebase，前台即時更新
       setStatus('儲存中…','saving');
-      try { await setDoc(DOC_REF,currentData); setStatus('資料已同步','saved'); toast(currentData.cluesFound[i]?'線索已標記為找到 ✔':'已取消找到狀態'); }
+      try { await setDoc(DOC_REF,currentData); setStatus('資料已同步','saved'); toast(isFound?'線索已標記為找到 ✔':'已取消找到狀態'); }
       catch(err){ setStatus('儲存失敗','error'); toast('儲存失敗'); }
     };
   });
