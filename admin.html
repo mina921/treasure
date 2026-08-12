@@ -58,12 +58,16 @@ main{max-width:1100px;margin:0 auto;display:none;gap:24px;flex-direction:column;
 .btn.danger:hover{background:rgba(220,120,120,.22);}
 .btn.small{padding:5px 10px;font-size:12px;}
 .tlist{display:flex;flex-direction:column;gap:10px;}
-.tlist .item{display:grid;grid-template-columns:80px 1fr 50px;gap:10px;align-items:center;background:rgba(232,200,105,.06);border:1px solid rgba(232,200,105,.3);border-radius:8px;padding:8px 12px;}
+.tlist .item{display:grid;grid-template-columns:80px 1fr auto 50px;gap:10px;align-items:center;background:rgba(232,200,105,.06);border:1px solid rgba(232,200,105,.3);border-radius:8px;padding:8px 12px;}
+.tlist .item.is-found{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.4);}
+.found-toggle{padding:5px 10px;border-radius:5px;cursor:pointer;font-family:inherit;font-size:12px;letter-spacing:.08em;border:1px solid rgba(232,200,105,.4);background:transparent;color:var(--gold-2);white-space:nowrap;}
+.found-toggle.active{background:rgba(192,57,43,.2);border-color:rgba(192,57,43,.7);color:#f4a0a0;}
 .tlist .item input{padding:7px 10px;background:rgba(7,10,31,.7);border:1px solid rgba(232,200,105,.4);border-radius:5px;color:var(--gold-1);font-family:inherit;font-size:14px;}
 .tlist .item .icon-input{text-align:center;font-size:18px;}
 .tlist-add{margin-top:12px;}
 .clue-list{display:flex;flex-direction:column;gap:10px;}
-.clue-list .item{display:grid;grid-template-columns:60px 1fr;gap:10px;align-items:center;background:rgba(232,200,105,.06);border:1px solid rgba(232,200,105,.3);border-radius:8px;padding:8px 12px;}
+.clue-list .item{display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:center;background:rgba(232,200,105,.06);border:1px solid rgba(232,200,105,.3);border-radius:8px;padding:8px 12px;}
+.clue-list .item.is-found{background:rgba(192,57,43,.08);border-color:rgba(192,57,43,.4);}
 .clue-list .item .label{font-family:"Cinzel",serif;font-weight:700;color:var(--gold-2);text-align:center;font-size:14px;letter-spacing:.15em;}
 .clue-list .item input{padding:7px 10px;background:rgba(7,10,31,.7);border:1px solid rgba(232,200,105,.4);border-radius:5px;color:var(--gold-1);font-family:inherit;font-size:14px;}
 .preview{width:100%;aspect-ratio:4/3;background:rgba(7,10,31,.6);border:1px dashed rgba(232,200,105,.4);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--gold-2);overflow:hidden;}
@@ -141,14 +145,14 @@ main{max-width:1100px;margin:0 auto;display:none;gap:24px;flex-direction:column;
 
   <section class="panel">
     <h2>③ 藏寶圖線索（6 條）</h2>
-    <p class="help">前台「藏寶圖」上 6 張紙條的內文。</p>
+    <p class="help">前台「藏寶圖」上 6 張紙條的內文。按「已找到」可在前台顯示紅色劃掉效果。</p>
     <div class="clue-list" id="cluesList">
-      <div class="item"><div class="label">①</div><input type="text" data-clue="0" placeholder="線索一"/></div>
-      <div class="item"><div class="label">②</div><input type="text" data-clue="1" placeholder="線索二"/></div>
-      <div class="item"><div class="label">③</div><input type="text" data-clue="2" placeholder="線索三"/></div>
-      <div class="item"><div class="label">④</div><input type="text" data-clue="3" placeholder="線索四"/></div>
-      <div class="item"><div class="label">⑤</div><input type="text" data-clue="4" placeholder="線索五"/></div>
-      <div class="item"><div class="label">⑥</div><input type="text" data-clue="5" placeholder="線索六"/></div>
+      <div class="item" id="clueItem0"><div class="label">①</div><input type="text" data-clue="0" placeholder="線索一"/><button class="found-toggle" data-clue-found="0">未找到</button></div>
+      <div class="item" id="clueItem1"><div class="label">②</div><input type="text" data-clue="1" placeholder="線索二"/><button class="found-toggle" data-clue-found="1">未找到</button></div>
+      <div class="item" id="clueItem2"><div class="label">③</div><input type="text" data-clue="2" placeholder="線索三"/><button class="found-toggle" data-clue-found="2">未找到</button></div>
+      <div class="item" id="clueItem3"><div class="label">④</div><input type="text" data-clue="3" placeholder="線索四"/><button class="found-toggle" data-clue-found="3">未找到</button></div>
+      <div class="item" id="clueItem4"><div class="label">⑤</div><input type="text" data-clue="4" placeholder="線索五"/><button class="found-toggle" data-clue-found="4">未找到</button></div>
+      <div class="item" id="clueItem5"><div class="label">⑥</div><input type="text" data-clue="5" placeholder="線索六"/><button class="found-toggle" data-clue-found="5">未找到</button></div>
     </div>
   </section>
 
@@ -283,6 +287,8 @@ async function loadData(){
       currentData.clues = Array.isArray(data.clues) ? data.clues : DEFAULT_DATA.clues;
       // 確保至少 6 個線索欄位
       while(currentData.clues.length < 6) currentData.clues.push('');
+      currentData.cluesFound = Array.isArray(data.cluesFound) ? data.cluesFound : [false,false,false,false,false,false];
+      while(currentData.cluesFound.length < 6) currentData.cluesFound.push(false);
       currentData.winners = Array.isArray(data.winners) ? data.winners : [];
     } else {
       currentData = JSON.parse(JSON.stringify(DEFAULT_DATA));
@@ -311,14 +317,22 @@ function renderAll(){
 function renderTreasures(){
   const wrap=$('treasuresList'); wrap.innerHTML='';
   currentData.treasures.forEach((t,i)=>{
-    const item=document.createElement('div'); item.className='item';
+    const item=document.createElement('div');
+    item.className='item'+(t.found?' is-found':'');
     item.innerHTML=`
       <input type="text" class="icon-input" value="${esc(t.icon||'')}" placeholder="🎁" maxlength="3"/>
       <input type="text" value="${esc(t.name||'')}" placeholder="例：NT$ 1,000 × 1"/>
+      <button class="found-toggle${t.found?' active':''}" data-found="${i}">${t.found?'✔ 已找到':'未找到'}</button>
       <button class="btn danger small" data-del="${i}">✕</button>`;
     wrap.appendChild(item);
   });
   wrap.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',markDirty));
+  wrap.querySelectorAll('button[data-found]').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.found;
+    collectFromForm();
+    currentData.treasures[i].found=!currentData.treasures[i].found;
+    renderTreasures(); markDirty();
+  }));
   wrap.querySelectorAll('button[data-del]').forEach(b=>b.addEventListener('click',()=>{
     if(!confirm('確定要刪除這個寶藏？')) return;
     collectFromForm(); currentData.treasures.splice(+b.dataset.del,1); renderTreasures(); markDirty();
@@ -330,8 +344,23 @@ $('addTreasureBtn').addEventListener('click',()=>{
 
 function renderClues(){
   document.querySelectorAll('#cluesList input[data-clue]').forEach(inp=>{
-    inp.value = currentData.clues[+inp.dataset.clue]||'';
+    const i=+inp.dataset.clue;
+    inp.value = currentData.clues[i]||'';
     inp.addEventListener('input',markDirty);
+  });
+  document.querySelectorAll('#cluesList button[data-clue-found]').forEach(btn=>{
+    const i=+btn.dataset.clueFound;
+    const isFound=(currentData.cluesFound||[])[i];
+    btn.textContent=isFound?'✔ 已找到':'未找到';
+    btn.classList.toggle('active',!!isFound);
+    const item=document.getElementById('clueItem'+i);
+    if(item) item.classList.toggle('is-found',!!isFound);
+    btn.onclick=()=>{
+      collectFromForm();
+      if(!currentData.cluesFound) currentData.cluesFound=[false,false,false,false,false,false];
+      currentData.cluesFound[i]=!currentData.cluesFound[i];
+      renderClues(); markDirty();
+    };
   });
 }
 
@@ -345,11 +374,12 @@ function collectFromForm(){
     const inp=it.querySelectorAll('input');
     return {icon:inp[0].value.trim(), name:inp[1].value.trim()};
   }).filter(t=>t.name);
-  // 6 條線索
+  // 6 條線索（文字）
   currentData.clues=[0,1,2,3,4,5].map(i=>{
     const el=document.querySelector(`#cluesList input[data-clue="${i}"]`);
     return el ? el.value.trim() : '';
   });
+  // cluesFound 由按鈕直接操作 currentData，不需要從 DOM 重收集
 }
 
 let winnerImg=null;

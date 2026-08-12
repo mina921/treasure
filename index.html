@@ -111,6 +111,12 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
 .scroll-list li{font-family:"Noto Serif TC",serif;font-size:clamp(13px,1.4vw,17px);font-weight:500;color:#2a1408;display:flex;align-items:center;justify-content:center;gap:12px;padding:6px 10px;border-bottom:1px dashed rgba(60,38,16,.4);line-height:1.5;white-space:nowrap;}
 .scroll-list li:last-child{border-bottom:none;}
 .scroll-list li .icon{font-size:1.25em;flex-shrink:0;}
+.scroll-list li.found{opacity:.75;}
+.scroll-list li.found .item-name{text-decoration:line-through;text-decoration-color:#c0392b;text-decoration-thickness:2px;color:#7a4a3a;}
+.scroll-list li .found-tag{font-size:.75em;color:#c0392b;font-weight:700;letter-spacing:.05em;margin-left:4px;flex-shrink:0;}
+.clue-paper.found-clue .clue-content{opacity:.8;}
+.clue-paper.found-clue .clue-text{text-decoration:line-through;text-decoration-color:#c0392b;text-decoration-thickness:2px;color:#7a4a3a;}
+.clue-paper.found-clue .clue-found-badge{font-size:.85em;color:#c0392b;font-weight:700;margin-top:4px;letter-spacing:.05em;}
 #screen-time{flex-direction:column;gap:0;justify-content:center;}
 #screen-time .time-card{margin-top:-180px;position:relative;z-index:2;}
 .hourglass-stage{position:relative;width:min(560px,72vw);aspect-ratio:.72;transform:scale(.25);opacity:0;transition:transform 1.2s cubic-bezier(.34,1.4,.6,1),opacity .9s ease;}
@@ -270,46 +276,52 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
 <section class="screen" id="screen-map">
   <div class="map-stage">
     <img src="06_map_bg.png" alt="藏寶地圖底圖" class="map-bg-img"/>
-    <div class="clue-paper c1">
+    <div class="clue-paper c1" id="clueCard1">
       <img src="07_clue_note.png" alt="線索"/>
       <div class="clue-content">
         <div class="clue-num">CLUE  ①</div>
-        <div id="clue1Text">魔法的光芒指引方向</div>
+        <div id="clue1Text" class="clue-text">魔法的光芒指引方向</div>
+        <div class="clue-found-badge" id="clue1Found" style="display:none;">✔ 已找到</div>
       </div>
     </div>
-    <div class="clue-paper c2">
+    <div class="clue-paper c2" id="clueCard2">
       <img src="07_clue_note.png" alt="線索"/>
       <div class="clue-content">
         <div class="clue-num">CLUE  ②</div>
-        <div id="clue2Text">細心觀察四周即可發現</div>
+        <div id="clue2Text" class="clue-text">細心觀察四周即可發現</div>
+        <div class="clue-found-badge" id="clue2Found" style="display:none;">✔ 已找到</div>
       </div>
     </div>
-    <div class="clue-paper c3">
+    <div class="clue-paper c3" id="clueCard3">
       <img src="07_clue_note.png" alt="線索"/>
       <div class="clue-content">
         <div class="clue-num">CLUE  ③</div>
-        <div id="clue3Text">寶藏就在不起眼的角落</div>
+        <div id="clue3Text" class="clue-text">寶藏就在不起眼的角落</div>
+        <div class="clue-found-badge" id="clue3Found" style="display:none;">✔ 已找到</div>
       </div>
     </div>
-    <div class="clue-paper c4">
+    <div class="clue-paper c4" id="clueCard4">
       <img src="07_clue_note.png" alt="線索"/>
       <div class="clue-content">
         <div class="clue-num">CLUE  ④</div>
-        <div id="clue4Text">往有光的地方前進</div>
+        <div id="clue4Text" class="clue-text">往有光的地方前進</div>
+        <div class="clue-found-badge" id="clue4Found" style="display:none;">✔ 已找到</div>
       </div>
     </div>
-    <div class="clue-paper c5">
+    <div class="clue-paper c5" id="clueCard5">
       <img src="07_clue_note.png" alt="線索"/>
       <div class="clue-content">
         <div class="clue-num">CLUE  ⑤</div>
-        <div id="clue5Text">記得抬頭看</div>
+        <div id="clue5Text" class="clue-text">記得抬頭看</div>
+        <div class="clue-found-badge" id="clue5Found" style="display:none;">✔ 已找到</div>
       </div>
     </div>
-    <div class="clue-paper c6">
+    <div class="clue-paper c6" id="clueCard6">
       <img src="07_clue_note.png" alt="線索"/>
       <div class="clue-content">
         <div class="clue-num">CLUE  ⑥</div>
-        <div id="clue6Text">第六感往往是對的</div>
+        <div id="clue6Text" class="clue-text">第六感往往是對的</div>
+        <div class="clue-found-badge" id="clue6Found" style="display:none;">✔ 已找到</div>
       </div>
     </div>
     <img src="10_gift_box.png" alt="獎品" class="map-gift"/>
@@ -434,7 +446,8 @@ function applyData(data){
   scrollList.innerHTML='';
   (C.treasures||[]).forEach(t=>{
     const li=document.createElement('li');
-    li.innerHTML='<span class="icon">'+(t.icon||'🎁')+'</span><span>'+esc(t.name)+'</span>';
+    if(t.found) li.classList.add('found');
+    li.innerHTML='<span class="icon">'+(t.icon||'🎁')+'</span><span class="item-name">'+esc(t.name)+'</span>'+(t.found?'<span class="found-tag">✔ 已找到</span>':'');
     scrollList.appendChild(li);
   });
 
@@ -443,7 +456,12 @@ function applyData(data){
 
   (C.clues||[]).forEach((clue,i)=>{
     const el=document.getElementById('clue'+(i+1)+'Text');
+    const card=document.getElementById('clueCard'+(i+1));
+    const badge=document.getElementById('clue'+(i+1)+'Found');
     if(el) el.textContent=clue;
+    const isFound=(C.cluesFound||[])[i];
+    if(card){ if(isFound) card.classList.add('found-clue'); else card.classList.remove('found-clue'); }
+    if(badge) badge.style.display=isFound?'block':'none';
   });
 
   if(Array.isArray(data.winners)){
