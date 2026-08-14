@@ -498,13 +498,11 @@ async function setTheme(t){
   currentData.theme=t;
   document.getElementById('themeDefault').classList.toggle('active',t==='default');
   document.getElementById('themeXmas').classList.toggle('active',t==='xmas');
-  document.getElementById('themeStatus').textContent='儲存中…';
   try{
     await setDoc(DOC_REF,currentData);
-    document.getElementById('themeStatus').textContent=t==='xmas'?'🎄 已切換為聖誕版':'已切換為原版';
-    setTimeout(()=>document.getElementById('themeStatus').textContent='',3000);
+    toast(t==='xmas'?'🎄 已切換為聖誕版':'已切換為原版');
   }catch(e){
-    document.getElementById('themeStatus').textContent='儲存失敗';
+    toast('儲存失敗');
   }
 }
 
