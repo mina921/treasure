@@ -493,7 +493,7 @@ function fileToDataURL(file,maxSide=1200,quality=0.8){
 
 
 /* 主題切換 */
-async function setTheme(t){
+window.setTheme = async function setTheme(t){
   if(!currentData) return;
   currentData.theme=t;
   document.getElementById('themeDefault').classList.toggle('active',t==='default');
