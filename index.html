@@ -646,22 +646,6 @@ function tickSnow(){
   snowAnimId=requestAnimationFrame(tickSnow);
 }
 
-  svgContent+=`<path d="${wirePath}" stroke="#444" stroke-width="1.5" fill="none"/>`;
-  // Bulbs
-  for(let i=0;i<count;i++){
-    const x=i*spacing;
-    const y=i%2===0?22:10;
-    const c=colors[i%colors.length];
-    svgContent+=`<rect x="${x-5}" y="${y-3}" width="10" height="4" rx="2" fill="#333"/>`;
-    svgContent+=`<ellipse cx="${x}" cy="${y+12}" rx="7" ry="10" fill="${c}" opacity="0.95"/>`;
-    svgContent+=`<ellipse cx="${x}" cy="${y+12}" rx="7" ry="10" fill="${c}" opacity="0.5" filter="url(#glow)"/>`;
-  }
-  // Glow filter
-  svgContent+=`<defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
-  svgContent+='</svg>';
-  el.innerHTML=svgContent;
-}
-
 function startXmas(){
   if(xmasActive) return;
   xmasActive=true;
