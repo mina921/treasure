@@ -91,6 +91,10 @@ main{max-width:1100px;margin:0 auto;display:none;gap:24px;flex-direction:column;
 .loading{position:fixed;inset:0;background:rgba(5,8,24,.85);display:flex;align-items:center;justify-content:center;z-index:1000;color:var(--gold-1);letter-spacing:.2em;font-size:14px;}
 .loading.hidden{display:none;}
 @media(max-width:760px){.row{grid-template-columns:1fr;}.tlist .item{grid-template-columns:60px 1fr 40px;}}
+
+.theme-btn{padding:10px 22px;border-radius:8px;border:1px solid rgba(232,200,105,.4);background:rgba(13,18,56,.8);color:var(--gold-1);font-family:"Noto Serif TC",serif;font-size:14px;cursor:pointer;transition:all .2s;}
+.theme-btn.active{background:linear-gradient(180deg,#d4a043,#8a5a18);color:#1a0e02;border-color:#f8e6a0;font-weight:700;}
+.theme-btn:hover:not(.active){background:rgba(212,160,67,.15);}
 </style>
 </head>
 <body>
@@ -153,6 +157,17 @@ main{max-width:1100px;margin:0 auto;display:none;gap:24px;flex-direction:column;
       <div class="item" id="clueItem3"><div class="label">④</div><input type="text" data-clue="3" placeholder="線索四"/><button class="found-toggle" data-clue-found="3">未找到</button></div>
       <div class="item" id="clueItem4"><div class="label">⑤</div><input type="text" data-clue="4" placeholder="線索五"/><button class="found-toggle" data-clue-found="4">未找到</button></div>
       <div class="item" id="clueItem5"><div class="label">⑥</div><input type="text" data-clue="5" placeholder="線索六"/><button class="found-toggle" data-clue-found="5">未找到</button></div>
+    </div>
+  </section>
+
+
+  <section class="panel">
+    <h2>🎄 主題切換</h2>
+    <p class="help">切換後前台所有人立即看到，無需重新整理。</p>
+    <div style="display:flex;gap:14px;align-items:center;">
+      <button id="themeDefault" class="theme-btn active" onclick="setTheme('default')">🏰 原版</button>
+      <button id="themeXmas" class="theme-btn" onclick="setTheme('xmas')">🎄 聖誕版</button>
+      <span id="themeStatus" style="font-size:12px;color:var(--gold-2);opacity:.7;"></span>
     </div>
   </section>
 
@@ -483,6 +498,30 @@ function fileToDataURL(file,maxSide=1200,quality=0.8){
   });
 }
 
+
+/* 主題切換 */
+async function setTheme(t){
+  if(!currentData) return;
+  currentData.theme=t;
+  document.getElementById('themeDefault').classList.toggle('active',t==='default');
+  document.getElementById('themeXmas').classList.toggle('active',t==='xmas');
+  document.getElementById('themeStatus').textContent='儲存中…';
+  try{
+    await setDoc(DOC_REF,currentData);
+    document.getElementById('themeStatus').textContent=t==='xmas'?'🎄 已切換為聖誕版':'已切換為原版';
+    setTimeout(()=>document.getElementById('themeStatus').textContent='',3000);
+  }catch(e){
+    document.getElementById('themeStatus').textContent='儲存失敗';
+  }
+}
+
+function updateThemeUI(theme){
+  const isXmas=theme==='xmas';
+  const db=document.getElementById('themeDefault');
+  const xb=document.getElementById('themeXmas');
+  if(db) db.classList.toggle('active',!isXmas);
+  if(xb) xb.classList.toggle('active',isXmas);
+}
 function esc(s){
   return String(s).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
 }

@@ -191,10 +191,50 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;
   .nav-action-btn{width:96px;bottom:20px;right:18px;}
   .nav-menu{right:60px;top:14px;}
 }
+
+/* ===== 聖誕模式 ===== */
+#xmasSnow{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0;transition:opacity 1.5s;}
+body.xmas-mode #xmasSnow{opacity:1;}
+#xmasDecor{position:fixed;inset:0;z-index:51;pointer-events:none;opacity:0;transition:opacity 1.5s;}
+body.xmas-mode #xmasDecor{opacity:1;}
+.xmas-holly{position:fixed;width:140px;height:140px;pointer-events:none;z-index:52;}
+.xmas-holly.tl{top:-10px;left:-10px;}
+.xmas-holly.tr{top:-10px;right:-10px;transform:scaleX(-1);}
+#xmasLights{position:fixed;top:0;left:0;right:0;height:64px;z-index:52;pointer-events:none;overflow:hidden;}
+#xmasLights svg{width:100%;height:100%;}
+body.xmas-mode .bg-sky{background:radial-gradient(ellipse at 50% 0%,#162050 0%,#080f22 80%) !important;}
 </style>
 </head>
 <body>
 <div class="bg-sky"></div>
+<!-- Christmas elements -->
+<canvas id="xmasSnow"></canvas>
+<div id="xmasLights" style="display:none;"></div>
+<div id="xmasDecor" style="display:none;">
+  <!-- Holly TL -->
+  <svg class="xmas-holly tl" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="45" cy="95" rx="38" ry="16" fill="#1e6b1e" transform="rotate(-40 45 95)"/>
+    <ellipse cx="75" cy="85" rx="38" ry="16" fill="#247a24" transform="rotate(10 75 85)"/>
+    <ellipse cx="30" cy="75" rx="32" ry="14" fill="#1a5c1a" transform="rotate(-60 30 75)"/>
+    <circle cx="65" cy="72" r="10" fill="#cc1111"/>
+    <circle cx="80" cy="65" r="9" fill="#dd1515"/>
+    <circle cx="70" cy="84" r="8" fill="#bb1010"/>
+    <circle cx="65" cy="72" r="3" fill="rgba(255,255,255,0.4)"/>
+    <circle cx="80" cy="65" r="2.5" fill="rgba(255,255,255,0.4)"/>
+  </svg>
+  <!-- Holly TR -->
+  <svg class="xmas-holly tr" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="45" cy="95" rx="38" ry="16" fill="#1e6b1e" transform="rotate(-40 45 95)"/>
+    <ellipse cx="75" cy="85" rx="38" ry="16" fill="#247a24" transform="rotate(10 75 85)"/>
+    <ellipse cx="30" cy="75" rx="32" ry="14" fill="#1a5c1a" transform="rotate(-60 30 75)"/>
+    <circle cx="65" cy="72" r="10" fill="#cc1111"/>
+    <circle cx="80" cy="65" r="9" fill="#dd1515"/>
+    <circle cx="70" cy="84" r="8" fill="#bb1010"/>
+    <circle cx="65" cy="72" r="3" fill="rgba(255,255,255,0.4)"/>
+    <circle cx="80" cy="65" r="2.5" fill="rgba(255,255,255,0.4)"/>
+  </svg>
+</div>
+
 <div class="bg-stars" id="starfield"></div>
 <div class="bg-particles" id="particles"></div>
 <div class="shooting-star" style="top:8%;left:-5%;--delay:3s;--dur:14s;"></div>
@@ -489,6 +529,8 @@ function applyData(data){
     }
   });
 
+  if(data.theme!==undefined) applyTheme(data.theme);
+
   if(Array.isArray(data.winners)){
     window._cloudWinners=data.winners;
     renderWinners();
@@ -547,6 +589,11 @@ function renderWinners(){
 }
 
 window._cloudWinners=null;
+// 主題切換
+function applyTheme(theme){
+  if(theme==='xmas') startXmas();
+  else stopXmas();
+}
 applyData(C);
 window.__applyData=applyData;
 
@@ -571,6 +618,117 @@ bgmToggle.addEventListener('click',(e)=>{
   bgmToggle.classList.toggle('muted',bgm.muted);
   if(!bgm.muted) startBgm();
 });
+
+/* ===== 聖誕模式 JS ===== */
+let xmasActive=false, snowAnimId=null;
+const snowCanvas=document.getElementById('xmasSnow');
+const snowCtx=snowCanvas ? snowCanvas.getContext('2d') : null;
+
+function resizeSnow(){
+  if(!snowCanvas) return;
+  snowCanvas.width=window.innerWidth;
+  snowCanvas.height=window.innerHeight;
+}
+window.addEventListener('resize',resizeSnow);
+resizeSnow();
+
+const FLAKES=Array.from({length:90},()=>({
+  x:Math.random()*window.innerWidth,
+  y:Math.random()*window.innerHeight,
+  r:Math.random()*3.5+1,
+  speed:Math.random()*1.2+0.4,
+  drift:Math.random()*0.6-0.3,
+  opacity:Math.random()*0.5+0.4
+}));
+
+function tickSnow(){
+  if(!snowCtx) return;
+  snowCtx.clearRect(0,0,snowCanvas.width,snowCanvas.height);
+  FLAKES.forEach(f=>{
+    f.y+=f.speed; f.x+=f.drift;
+    if(f.y>snowCanvas.height+5){f.y=-5;f.x=Math.random()*snowCanvas.width;}
+    if(f.x>snowCanvas.width+5) f.x=-5;
+    if(f.x<-5) f.x=snowCanvas.width+5;
+    snowCtx.globalAlpha=f.opacity;
+    snowCtx.beginPath();
+    snowCtx.arc(f.x,f.y,f.r,0,Math.PI*2);
+    snowCtx.fillStyle='#ffffff';
+    snowCtx.fill();
+  });
+  snowCtx.globalAlpha=1;
+  snowAnimId=requestAnimationFrame(tickSnow);
+}
+
+function buildLights(){
+  const el=document.getElementById('xmasLights');
+  const colors=['#ff3b3b','#ffd700','#3bff3b','#3b9fff','#ff8c00','#ff3bff'];
+  const count=Math.ceil(window.innerWidth/55)+2;
+  const spacing=window.innerWidth/(count-1);
+  let svgContent=`<svg viewBox="0 0 ${window.innerWidth} 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">`;
+  // Wire
+  let wirePath=`M0,16`;
+  for(let i=1;i<count;i++){
+    const x=i*spacing;
+    const sag=i%2===0?22:10;
+    wirePath+=` Q${x-spacing/2},${sag} ${x},16`;
+  }
+  svgContent+=`<path d="${wirePath}" stroke="#444" stroke-width="1.5" fill="none"/>`;
+  // Bulbs
+  for(let i=0;i<count;i++){
+    const x=i*spacing;
+    const y=i%2===0?22:10;
+    const c=colors[i%colors.length];
+    svgContent+=`<rect x="${x-5}" y="${y-3}" width="10" height="4" rx="2" fill="#333"/>`;
+    svgContent+=`<ellipse cx="${x}" cy="${y+12}" rx="7" ry="10" fill="${c}" opacity="0.95"/>`;
+    svgContent+=`<ellipse cx="${x}" cy="${y+12}" rx="7" ry="10" fill="${c}" opacity="0.5" filter="url(#glow)"/>`;
+  }
+  // Glow filter
+  svgContent+=`<defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>`;
+  svgContent+='</svg>';
+  el.innerHTML=svgContent;
+}
+
+function startXmas(){
+  if(xmasActive) return;
+  xmasActive=true;
+  document.body.classList.add('xmas-mode');
+  // Decorations
+  const ld=document.getElementById('xmasLights');
+  const dd=document.getElementById('xmasDecor');
+  buildLights();
+  if(ld) ld.style.display='block';
+  if(dd) dd.style.display='block';
+  setTimeout(()=>{ if(ld) ld.style.opacity='1'; if(dd) dd.style.opacity='1'; },50);
+  // Snow
+  if(!snowAnimId) tickSnow();
+  // Music switch
+  const wasMuted=bgm.muted;
+  bgm.pause();
+  bgm.src='聖誕歌-藏寶.MP3';
+  bgm.load();
+  bgmStarted=false;
+  if(!wasMuted){ bgm.play().then(()=>bgmStarted=true).catch(()=>{}); }
+}
+
+function stopXmas(){
+  if(!xmasActive) return;
+  xmasActive=false;
+  document.body.classList.remove('xmas-mode');
+  const ld=document.getElementById('xmasLights');
+  const dd=document.getElementById('xmasDecor');
+  if(ld){ld.style.opacity='0'; setTimeout(()=>ld.style.display='none',1500);}
+  if(dd){dd.style.opacity='0'; setTimeout(()=>dd.style.display='none',1500);}
+  // Snow
+  if(snowAnimId){cancelAnimationFrame(snowAnimId);snowAnimId=null;}
+  if(snowCtx) snowCtx.clearRect(0,0,snowCanvas.width,snowCanvas.height);
+  // Music restore
+  const wasMuted=bgm.muted;
+  bgm.pause();
+  bgm.src='bgm.mp3';
+  bgm.load();
+  bgmStarted=false;
+  if(!wasMuted){ bgm.play().then(()=>bgmStarted=true).catch(()=>{}); }
+}
 </script>
 
 <!-- Firebase -->
