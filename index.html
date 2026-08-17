@@ -435,6 +435,9 @@ function go(name){
   navMenu.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.go===name));
   if(name==='chest') startChestSequence();
   if(name==='winners') renderWinners();
+  // Hide tree on content screens, show on entry/chest
+  const xt=document.getElementById('xmasTree');
+  if(xt&&xt.style.display!=='none'){xt.style.visibility=(name==='entry'||name==='chest')?'visible':'hidden';}
 }
 
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
