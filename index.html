@@ -670,6 +670,9 @@ function startXmas(){
     document.querySelectorAll('.fairy').forEach(f=>f.classList.remove('xmas-wait'));
   },9000);
   // Snow
+  // Swap scroll to Christmas version
+  const scrollImg=document.querySelector('.scroll-img');
+  if(scrollImg) scrollImg.src='xmas_scroll.png';
   if(!snowAnimId) tickSnow();
   // Music switch
   const wasMuted=bgm.muted;
@@ -696,6 +699,9 @@ function stopXmas(){
   if(window._fairyTimer) clearTimeout(window._fairyTimer);
   document.querySelectorAll('.fairy').forEach(f=>f.classList.remove('xmas-wait'));
   // Snow
+  // Restore original scroll
+  const scrollImgR=document.querySelector('.scroll-img');
+  if(scrollImgR) scrollImgR.src='11_scroll.png';
   if(snowAnimId){cancelAnimationFrame(snowAnimId);snowAnimId=null;}
   if(snowCtx) snowCtx.clearRect(0,0,snowCanvas.width,snowCanvas.height);
   // Music restore
